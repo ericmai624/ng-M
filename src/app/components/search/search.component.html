@@ -1,6 +1,10 @@
 <div class="search">
-  <input placeholder="Search..." />
-  <button>
+  <input 
+    placeholder="Search..."
+    value={{input}}
+    (keyup)="handleSearchInput($event)"
+  />
+  <button (click)="handleSearchSubmit()">
     <i class="fa fa-search fa-2x fa-inverse" aria-hidden="true"></i>    
   </button>
 </div>

@@ -1,0 +1,16 @@
+.movie {
+  background: rgba(220, 220, 220, 0.8);
+  width: 150px;
+  height: 240px;
+  box-sizing: border-box;
+}
+.movie-image {
+  width: 150px;
+  height: 200px;
+}
+.movie-info {
+  background: rgb(236, 236, 236);
+  height: 40px;
+  padding: 0.5rem;
+  box-sizing: border-box;
+}
