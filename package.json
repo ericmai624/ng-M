@@ -5,7 +5,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build --prod --build-optimizer",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
@@ -30,6 +30,8 @@
     "express-session": "^1.15.6",
     "lodash": "^4.17.4",
     "mongoose": "^4.13.0",
+    "request": "^2.83.0",
+    "request-promise": "^4.2.2",
     "rxjs": "^5.5.2",
     "zone.js": "^0.8.14"
   },

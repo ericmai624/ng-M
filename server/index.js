@@ -8,12 +8,7 @@ const port = process.env.PORT || 8080;
 app.use(middleware.bodyParser.json());
 app.use(middleware.bodyParser.urlencoded({ extended: true }));
 
-app.use(express.static(path.join(__dirname + '/../dist/'), {
-  setHeaders: res => {
-    console.log('setHeaders');
-    res.set('Access-Control-Allow-Origin', 'http://localhost:4200');
-  }
-}));
+app.use(express.static(path.join(__dirname + '/../dist/')));
 
 app.use('/api/movies', routes.movies);
 

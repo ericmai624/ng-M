@@ -6,7 +6,12 @@ export class MovieService {
   constructor(private http: HttpClient) { }
 
   fetchMovies() {
-   return this.http.get('http://localhost:8080/api/movies');
+    const domain = true ? 'http://localhost:8080' : '';
+    return this.http.get(`${domain}/api/movies`);
+  }
+
+  fetchPoster(url) {
+    return this.http.get(`http://localhost:8080/api/movies/poster?url=${url}`);
   }
 
 }

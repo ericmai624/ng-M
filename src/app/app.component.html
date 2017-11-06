@@ -1,13 +1,6 @@
 <div class="root">
   <app-nav></app-nav>
-  <div class="content">
-    <app-search></app-search>
-  </div>
-  <div class="movie-preview">
-    <app-movie 
-      *ngFor="let movie of movies" 
-      [movie]="movie"
-    >
-    </app-movie>
+  <div class="wrapper">
+    <router-outlet></router-outlet>
   </div>
 </div>

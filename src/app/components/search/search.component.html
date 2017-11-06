@@ -1,7 +1,7 @@
 <div class="search">
   <input 
     placeholder="Search..."
-    value={{input}}
+    [value]="input"
     (keyup)="handleSearchInput($event)"
   />
   <button (click)="handleSearchSubmit()">
