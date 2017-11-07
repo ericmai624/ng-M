@@ -6,4 +6,8 @@ router.route('/')
   .post()
 ;
 
+router.get('/poster', MovieController.fetchPoster);
+
+router.get('/search', MovieController.fetchMoviesWithKeyword);
+
 module.exports = router;

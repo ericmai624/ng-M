@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-search',
@@ -7,27 +7,31 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SearchComponent implements OnInit {
   input: string;
+  @Output() onSearchFocus: EventEmitter<boolean>;
+  @Output() onSearchSubmit: EventEmitter<string>;
 
-  constructor() {
+  constructor() { 
     this.input = '';
+    this.onSearchFocus = new EventEmitter();
+    this.onSearchSubmit = new EventEmitter();
   }
 
   ngOnInit() { }
 
-  handleSearchInput(e: any) {
-    if (e.which === 13) {
-      return this.handleSearchSubmit();
-    }
-    this.input = e.target.value;
+  handleSearchFocus() {
+    this.onSearchFocus.emit(true);
+  }
+
+  handleSearchBlur() {
+    this.onSearchFocus.emit(false);
+  }
+
+  handleSearchInput(value: string) {
+    this.input = value;
   }
 
   handleSearchSubmit() {
-    console.log(this.input);
-    this.resetInput();
-  }
-
-  resetInput() {
-    this.input = '';
+    this.onSearchSubmit.emit(this.input);
   }
 
 }

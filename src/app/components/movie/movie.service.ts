@@ -1,17 +1,26 @@
-import { Injectable } from '@angular/core';
+import { Injectable, isDevMode } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class MovieService {
-  constructor(private http: HttpClient) { }
+  dev: boolean;
+  domain: string
 
-  fetchMovies() {
-    const domain = true ? 'http://localhost:8080' : '';
-    return this.http.get(`${domain}/api/movies`);
+  constructor(private http: HttpClient) {
+    this.dev = isDevMode();
+    this.domain = this.dev ? 'http://localhost:8080' : ''; 
   }
 
-  fetchPoster(url) {
-    return this.http.get(`http://localhost:8080/api/movies/poster?url=${url}`);
+  fetchMovies() {
+    return this.http.get(`${this.domain}/api/movies`);
+  }
+
+  fetchPoster(link) {
+    return this.http.get(`${this.domain}/api/movies/poster?link=${link}`);
+  }
+
+  fetchWithKeyword(keyword) {
+    return this.http.get(`${this.domain}/api/movies/search?keyword=${keyword}`);
   }
 
 }

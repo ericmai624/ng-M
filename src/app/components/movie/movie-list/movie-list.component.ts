@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { MovieService } from '../movie.service';
 
 @Component({
   selector: 'app-movie-list',
@@ -8,9 +9,19 @@ import { Component, OnInit, Input } from '@angular/core';
 export class MovieListComponent implements OnInit {
   @Input() movie: Movie;
 
-  constructor() { }
+  constructor(private movieService: MovieService) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.movieService.fetchPoster(this.movie.images.large).subscribe(
+      data => {
+        this.movie.imageURL = data;
+      },
+
+      err => {
+        console.log(err);
+      }
+    );
+  }
 
 }
 
@@ -33,5 +44,5 @@ interface Movie {
   id: string,
   directors: [{}],
   casts: [{}],
-  imageURL: string
+  imageURL: any
 }

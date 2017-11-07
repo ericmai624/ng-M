@@ -1,8 +1,12 @@
 <div class="search">
   <input 
     placeholder="Search..."
+    #search
     [value]="input"
-    (keyup)="handleSearchInput($event)"
+    (keyup)="handleSearchInput(search.value)"
+    (keyup.enter)="handleSearchSubmit()"
+    (focus)="handleSearchFocus()"
+    (blur)="handleSearchBlur()"
   />
   <button (click)="handleSearchSubmit()">
     <i class="fa fa-search fa-2x fa-inverse" aria-hidden="true"></i>    

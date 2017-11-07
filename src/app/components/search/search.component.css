@@ -4,6 +4,7 @@
   border: 2px solid rgba(34, 34, 34, 0.8);
   border-radius: 5px;
 }
+
 .search input {
   font-size: 1em;
   outline: none;
@@ -14,6 +15,7 @@
   border-radius: 5px 0 0 5px;
   box-sizing: border-box;
 }
+
 .search button {
   width: 37px;
   height: 35px;

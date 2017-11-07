@@ -1,7 +1,7 @@
 <a routerLink="/movie/movie.title">
   <div class="movie">
     <div class="movie-image">
-      <img [src]="movie.imageURL" alt="" width="100%" height="100%"/>
+      <img [src]="movie.imageURL || ''" alt="" width="100%" height="100%"/>
     </div>
     <div class="movie-info">
       {{movie.title}}
