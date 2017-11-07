@@ -9,7 +9,7 @@ module.exports.fetchMovies = (req, res) => {
     })
     .catch(err => {
       console.log('error in fetchMovies promise chain: ', err);
-      res.sendStatus(500);
+      res.sendStatus(400);
     });
 };
 
@@ -24,19 +24,21 @@ module.exports.fetchPoster = (req, res) => {
     }) 
     .catch(err => {
       console.log('error fetching poster: ', err);
-      res.sendStatus(404);
+      res.sendStatus(400);
     });
 };
 
 module.exports.fetchMoviesWithKeyword = (req, res) => {
   res.set('Access-Control-Allow-Origin', 'http://localhost:4200');
-  const keyword = req.query.keyword;
-  request.get(`https://api.douban.com/v2/movie/search?q=${keyword}`)
+  request({ 
+    uri: 'https://api.douban.com/v2/movie/search', 
+    qs: { q: req.query.keyword }
+  })
     .then(body => {
       res.send(body);
     })  
     .catch(err => {
       console.log('err when fetching movie with keyword: ', err);
-      res.sendStatus(404);
+      res.sendStatus(400);
     });
 };
