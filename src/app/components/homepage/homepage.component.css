@@ -4,13 +4,17 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  height: 61.8vh;
   transition: all 0.25s ease-out;  
 }
 
 .focus {
-  height: 400px;
+  height: 200px;
   transition: all 0.25s ease-in;
+}
+
+.title {
+  text-align: center;
 }
 
 .movie-list {
@@ -22,5 +26,21 @@
   grid-template-columns: repeat(auto-fit, 150px);
   grid-row-gap: 1rem;
   justify-content: space-between;
-  min-height: 400px;
+}
+
+.spinner {
+  position: absolute;
+  left: 50%;
+  margin-left: -15px;
+  border: 5px solid #f3f3f3;
+  border-top: 5px solid rgba(34, 34, 34, 0.8);
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  animation: spin 0.75s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }

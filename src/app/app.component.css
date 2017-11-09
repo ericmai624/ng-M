@@ -1,7 +1,7 @@
 .root {
   display: grid;
   grid-template-columns: 16.66% repeat(3, 1fr) 16.66%;
-  grid-template-rows: repeat(2, auto);
+  grid-template-rows: auto 1fr;
 }
 
 .wrapper {
