@@ -10,6 +10,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "server": "nodemon server",
+    "heroku-prebuild": "npm install -g @angular/cli",
     "heroku-postbuild": "yarn run build"
   },
   "private": true,
