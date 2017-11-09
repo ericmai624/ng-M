@@ -8,9 +8,8 @@
 <div class="title">{{title}}</div>
 <hr width="5%" align="center" color="#E19771">
 <div class="movie-list">
-  <div *ngIf="loading; else movieList" class="spinner"></div>
+  <div *ngIf="loading" class="spinner"></div>
   <app-movie-list 
-    #movieList
     *ngFor="let movie of movies" 
     [movie]="movie"
   >
