@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 @Injectable()
 export class MovieService {
   dev: boolean;
-  domain: string
+  domain: string;
 
   constructor(private http: HttpClient) {
     this.dev = isDevMode();
@@ -15,11 +15,11 @@ export class MovieService {
     return this.http.get(`${this.domain}/api/movies`);
   }
 
-  fetchPoster(link) {
-    return this.http.get(`${this.domain}/api/movies/poster?link=${link}`);
+  fetchPoster(link: string) {
+    return this.http.get(`${this.domain}/api/movies/poster?link=${link}`);    
   }
 
-  fetchWithKeyword(keyword) {
+  fetchWithKeyword(keyword: string) {
     return this.http.get(`${this.domain}/api/movies/search?keyword=${keyword}`);
   }
 

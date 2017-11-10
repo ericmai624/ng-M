@@ -8,11 +8,24 @@ import { MovieService } from '../movie.service';
 })
 export class MovieListComponent implements OnInit {
   @Input() movie: Movie;
-  @Input() imgSrcPrefix: Images;
+  poster: string;
 
   constructor(private movieService: MovieService) { }
 
-  ngOnInit() {
+  ngOnInit() { 
+    this.getPoster();
+  }
+
+  getPoster() {
+    this.movieService.fetchPoster(this.movie.poster_path).subscribe(
+      (data: string) => {
+        this.poster = data;
+      },
+
+      (err: string) => {
+        console.log(err);
+      }
+    );
   }
 
 }
@@ -31,14 +44,4 @@ interface Movie {
   adult: boolean,
   overview: string,
   release_date: string,
-}
-
-interface Images {
-  base_url: string,
-  secure_base_url: string,
-  backdrop_sizes: string[],
-  logo_sizes: string[],
-  poster_sizes: string[],
-  profile_sizes: string[],
-  still_sizes: string[]
 }

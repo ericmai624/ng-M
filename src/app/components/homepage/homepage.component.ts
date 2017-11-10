@@ -18,6 +18,10 @@ export class HomepageComponent implements OnInit {
   constructor(private movieService: MovieService) { }
   
   ngOnInit() { 
+    this.onPageLoad();
+  }
+
+  onPageLoad() {
     this.loading = true;
     this.title = 'POPULAR';
     this.movieService.fetchMovies().subscribe(
@@ -32,7 +36,7 @@ export class HomepageComponent implements OnInit {
         console.log(err);
       }
     );
-  }
+  }  
 
   onSearchFocus(focused: boolean) {
     this.searchFocused = focused;
@@ -43,7 +47,7 @@ export class HomepageComponent implements OnInit {
     this.movies = [];
     this.title = 'SEARCH RESULT';
     this.movieService.fetchWithKeyword(keyword).subscribe(
-      data => {
+      (data: object) => {
         this.loading = false;        
         this.movies = data['results'].sort((a, b) => {
           let curr = Date.parse(a['release_date']);
@@ -52,11 +56,11 @@ export class HomepageComponent implements OnInit {
         });
       },
 
-      err => {
+      (err: string) => {
         this.loading = false;        
         console.log(err);
       }
-    )
+    );
   }
 
 }

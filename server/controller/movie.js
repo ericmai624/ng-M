@@ -1,6 +1,12 @@
 const request = require('request-promise');
+const fs = require('fs');
+const path = require('path');
 const Promise = require('bluebird');
+const chalk = require('chalk');
+
 const config = require('config')['themoviedb'];
+
+const readFileAsync = Promise.promisify(fs.readFile);
 
 module.exports.fetchMovies = (req, res) => {
   const options = {
@@ -12,24 +18,13 @@ module.exports.fetchMovies = (req, res) => {
       sort_by: 'popularity.desc',
       include_adult: false,
       page: 1,
-      year: 2017
+      year: (new Date()).getFullYear()
     }
   };
 
-  Promise.all([
-    request(options),
-    request.get(`${config.hostname}/3/configuration`, { qs: { api_key: config.apiKey } })
-  ])
-    .then(([data, configuration]) => {
-      let movies = JSON.parse(data);
-      let configObj = JSON.parse(configuration);
-      movies.images = configObj.images;
-      res.send(movies);
-    })
-    .catch((err) => {
-      console.log('error in fetch movies promise chain: ', err);
-    })
-  ;
+  request(options)
+    .then((body) => res.send(body))
+    .catch((err) => console.log('error in fetch movies promise chain: ', err));
 };
 
 module.exports.fetchMoviesWithKeyword = (req, res) => {
@@ -53,18 +48,31 @@ module.exports.fetchMoviesWithKeyword = (req, res) => {
   ;
 };
 
-/* Not necessary for now
 module.exports.fetchPoster = (req, res) => {
   const link = req.query.link;
-  request({ uri: link, resolveWithFullResponse: true, encoding: 'binary' })
+
+  if (link === 'null') {
+    return res.sendStatus(400);
+  }
+
+  readFileAsync(path.join(__dirname + '/../../worker/config.txt'))
+    .then((file) => {
+      let configuration = JSON.parse(file);
+      let uri = configuration.images.secure_base_url
+              + configuration.images.poster_sizes[4]
+              + link
+      ;
+      let resolveWithFullResponse = true;
+      let encoding = 'binary';
+      return request({ uri, resolveWithFullResponse, encoding });
+    })
     .then(response => {
       let prefix = `data:${response.headers['content-type']};base64,`;
       let base64 = Buffer.from(response.body, 'binary').toString('base64');
       res.send(JSON.stringify(prefix + base64));
-    }) 
+    })
     .catch(err => {
-      console.log('error fetching poster: ', err);
-      res.sendStatus(400);
+      console.log(chalk.red('error fetching poster: ', err));
+      res.sendStatus(404);
     });
 };
-*/

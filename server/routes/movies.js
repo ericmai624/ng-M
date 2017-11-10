@@ -6,7 +6,7 @@ router.route('/')
   .post()
 ;
 
-// router.get('/poster', MovieController.fetchPoster);
+router.get('/poster', MovieController.fetchPoster);
 
 router.get('/search', MovieController.fetchMoviesWithKeyword);
 
