@@ -8,41 +8,37 @@ import { MovieService } from '../movie.service';
 })
 export class MovieListComponent implements OnInit {
   @Input() movie: Movie;
+  @Input() imgSrcPrefix: Images;
 
   constructor(private movieService: MovieService) { }
 
   ngOnInit() {
-    this.movieService.fetchPoster(this.movie.images.large).subscribe(
-      data => {
-        this.movie.imageURL = data;
-      },
-
-      err => {
-        console.log(err);
-      }
-    );
   }
 
 }
 
 interface Movie {
+  vote_count: number,
+  id: number,
+  video: boolean,
   title: string,
-  rating: {
-    max: number,
-    average: number,
-    stars: string,
-    min: number
-  },
-  images: {
-    small: string,
-    large: string,
-    medium: string
-  },
-  genres: string[],
+  popularity: number,
+  poster_path: string,
+  original_language: string,
   original_title: string,
-  year: string,
-  id: string,
-  directors: [{}],
-  casts: [{}],
-  imageURL: any
+  genre_ids: number[],
+  backdrop_path: string,
+  adult: boolean,
+  overview: string,
+  release_date: string,
+}
+
+interface Images {
+  base_url: string,
+  secure_base_url: string,
+  backdrop_sizes: string[],
+  logo_sizes: string[],
+  poster_sizes: string[],
+  profile_sizes: string[],
+  still_sizes: string[]
 }

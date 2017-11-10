@@ -10,6 +10,7 @@ import { MovieService } from '../movie/movie.service';
 })
 export class HomepageComponent implements OnInit {
   movies: object;
+  imgSrcPrefix: string;
   loading: boolean;
   searchFocused: boolean;
   title: string;
@@ -18,14 +19,15 @@ export class HomepageComponent implements OnInit {
   
   ngOnInit() { 
     this.loading = true;
-    this.title = 'COMING SOON';
+    this.title = 'POPULAR';
     this.movieService.fetchMovies().subscribe(
-      data => {
+      (data: object) => {
         this.loading = false;        
-        this.movies = data['subjects'];
+        this.movies = data['results'];
+        this.imgSrcPrefix = data['images'];
       },
 
-      err => {
+      (err: string) => {
         this.loading = false;        
         console.log(err);
       }
@@ -43,7 +45,11 @@ export class HomepageComponent implements OnInit {
     this.movieService.fetchWithKeyword(keyword).subscribe(
       data => {
         this.loading = false;        
-        this.movies = data['subjects'];
+        this.movies = data['results'].sort((a, b) => {
+          let curr = Date.parse(a['release_date']);
+          let next = Date.parse(b['release_date']);
+          return next - curr;
+        });
       },
 
       err => {

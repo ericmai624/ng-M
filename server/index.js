@@ -10,6 +10,6 @@ app.use(middleware.bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static(path.join(__dirname + '/../dist/')));
 
-app.use('/api/movies', routes.movies);
+app.use('/api/movies', middleware.setHeaders, routes.movies);
 
 app.listen(port, () => console.log(`Ready to accept connections on ${port}`));

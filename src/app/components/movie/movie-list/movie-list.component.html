@@ -1,7 +1,9 @@
-<a routerLink="/movie/movie.title">
+<a routerLink="/movie/movie.subject.title">
   <div class="movie">
     <div class="movie-image">
-      <img [src]="movie.imageURL || ''" alt="" width="100%" height="100%"/>
+      <img [src]="imgSrcPrefix.secure_base_url 
+        + (imgSrcPrefix.poster_sizes[4] || imgSrcPrefix.poster_sizes[imgSrcPrefix.poster_sizes.length - 1]) 
+        + movie.poster_path" alt="" width="100%" height="100%"/>
     </div>
     <div class="movie-info">
       {{movie.title}}

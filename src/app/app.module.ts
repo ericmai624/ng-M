@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { NgModule, enableProdMode } from '@angular/core';
 
 import { AppComponent } from './app.component';
@@ -10,13 +10,8 @@ import { MovieListComponent } from './components/movie/movie-list/movie-list.com
 
 import { MovieService } from './components/movie/movie.service';
 import { MovieInfoComponent } from './components/movie/movie-info/movie-info.component';
-import { environment } from '../environments/environment';
 import { HomepageComponent } from './components/homepage/homepage.component';
-
-const appRoutes: Routes = [
-  { path: '', component: HomepageComponent },
-  { path: 'movie/:name', component: MovieInfoComponent }
-];
+import { AppRoutingModule } from './/app-routing.module';
 
 @NgModule({
   declarations: [
@@ -28,9 +23,9 @@ const appRoutes: Routes = [
     HomepageComponent
   ],
   imports: [
-    RouterModule.forRoot(appRoutes, { enableTracing: true }),
     BrowserModule,
     HttpClientModule,
+    AppRoutingModule,
   ],
   providers: [
     MovieService

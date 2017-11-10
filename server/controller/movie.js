@@ -1,20 +1,60 @@
 const request = require('request-promise');
 const Promise = require('bluebird');
+const config = require('config')['themoviedb'];
 
 module.exports.fetchMovies = (req, res) => {
-  res.set('Access-Control-Allow-Origin', 'http://localhost:4200');
-  request.get('https://api.douban.com/v2/movie/coming_soon?count=100')
-    .then(body => {
-      res.send(body);
+  const options = {
+    uri: `${config.hostname}/3/discover/movie`,
+    qs: {
+      api_key: config.apiKey,
+      language: 'en-US',
+      region: 'US',
+      sort_by: 'popularity.desc',
+      include_adult: false,
+      page: 1,
+      year: 2017
+    }
+  };
+
+  Promise.all([
+    request(options),
+    request.get(`${config.hostname}/3/configuration`, { qs: { api_key: config.apiKey } })
+  ])
+    .then(([data, configuration]) => {
+      let movies = JSON.parse(data);
+      let configObj = JSON.parse(configuration);
+      movies.images = configObj.images;
+      res.send(movies);
     })
-    .catch(err => {
-      console.log('error in fetchMovies promise chain: ', err);
-      res.sendStatus(400);
-    });
+    .catch((err) => {
+      console.log('error in fetch movies promise chain: ', err);
+    })
+  ;
 };
 
+module.exports.fetchMoviesWithKeyword = (req, res) => {
+  const options = {
+    uri: `${config.hostname}/3/search/movie`,
+    qs: {
+      api_key: config.apiKey,      
+      query: req.query.keyword,
+      include_adult: false
+    }    
+  };
+
+  request(options)
+    .then(body => {
+      res.send(body);
+    })  
+    .catch(err => {
+      console.log('err when fetching movie with keyword: ', err);
+      res.sendStatus(400);
+    })
+  ;
+};
+
+/* Not necessary for now
 module.exports.fetchPoster = (req, res) => {
-  res.set('Access-Control-Allow-Origin', 'http://localhost:4200');
   const link = req.query.link;
   request({ uri: link, resolveWithFullResponse: true, encoding: 'binary' })
     .then(response => {
@@ -27,18 +67,4 @@ module.exports.fetchPoster = (req, res) => {
       res.sendStatus(400);
     });
 };
-
-module.exports.fetchMoviesWithKeyword = (req, res) => {
-  res.set('Access-Control-Allow-Origin', 'http://localhost:4200');
-  request({ 
-    uri: 'https://api.douban.com/v2/movie/search', 
-    qs: { q: req.query.keyword }
-  })
-    .then(body => {
-      res.send(body);
-    })  
-    .catch(err => {
-      console.log('err when fetching movie with keyword: ', err);
-      res.sendStatus(400);
-    });
-};
+*/
