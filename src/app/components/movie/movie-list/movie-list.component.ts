@@ -1,4 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+
 import { MovieService } from '../movie.service';
 
 @Component({
@@ -7,56 +8,32 @@ import { MovieService } from '../movie.service';
   styleUrls: ['./movie-list.component.css']
 })
 export class MovieListComponent implements OnInit {
-  @Input() movie: Movie;
+  movies: object;
   poster: string;
-
-  constructor(private movieService: MovieService) { }
-
-  ngOnInit() { 
-    this.getPoster(this.movie.poster_path);
+  @Output() fetchingMovie: EventEmitter<boolean>;
+  
+  constructor(private movieService: MovieService) { 
+    this.movies = [];
+    this.fetchingMovie = new EventEmitter();
   }
 
-  getPoster(link: string) {
-    this.movieService.fetchPoster(link).subscribe(
-      (data: string) => {
-        this.poster = data;
+  ngOnInit() {
+    this.fetchMovies();
+  }
+
+  fetchMovies() {
+    this.fetchingMovie.emit(true);
+    this.movieService.fetchMovies().subscribe(
+      data => {
+        this.fetchingMovie.emit(false);
+        this.movies = data['results'];
       },
 
-      (err: string) => {
-        this.poster = '/assets/icons/icons8-popcorn-time.png';
+      err => {
         console.log(err);
       }
-    );
-  }
-
-  updateInfoUrl(title) {
-    let result = '';
-
-    for (let i = 0; i < title.length; i++) {
-      if (result[result.length - 1] === ':') {
-        result += title[i].match(/\s/) ? '' : title[i];
-      } else {
-        result += title[i].match(/\s/) ? '-' : title[i];
-      }
-    }
-
-    return result;
+    )
   }
 
 }
 
-interface Movie {
-  vote_count: number,
-  id: number,
-  video: boolean,
-  title: string,
-  popularity: number,
-  poster_path: string,
-  original_language: string,
-  original_title: string,
-  genre_ids: number[],
-  backdrop_path: string,
-  adult: boolean,
-  overview: string,
-  release_date: string,
-}

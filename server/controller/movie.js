@@ -24,7 +24,7 @@ module.exports.fetchMovies = (req, res) => {
 
   request(options)
     .then((body) => res.send(body))
-    .catch((err) => console.log('error in fetch movies promise chain: ', err));
+    .catch((err) => console.log(chalk.red('error in fetch movies promise chain: ' + err)));
 };
 
 module.exports.fetchMoviesWithKeyword = (req, res) => {
@@ -42,7 +42,7 @@ module.exports.fetchMoviesWithKeyword = (req, res) => {
       res.send(body);
     })  
     .catch(err => {
-      console.log('err when fetching movie with keyword: ', err);
+      console.log(chalk.red('err when fetching movie with keyword: ' + err));
       res.sendStatus(400);
     })
   ;
@@ -72,7 +72,7 @@ module.exports.fetchPoster = (req, res) => {
       res.send(JSON.stringify(prefix + base64));
     })
     .catch(err => {
-      console.log(chalk.red('error fetching poster: ', err));
+      console.log(chalk.red('error fetching poster: ' + err));
       res.sendStatus(404);
     });
 };

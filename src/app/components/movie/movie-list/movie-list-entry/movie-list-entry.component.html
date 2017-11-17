@@ -1,0 +1,10 @@
+<a [routerLink]="'/movie/' + movie.id + '/' + updateUrl(movie.title)">
+  <div class="movie">
+    <div class="movie-image">
+      <img [src]="poster" alt="" width="100%" height="auto"/>
+    </div>
+    <div class="movie-info">
+      {{movie.title}}
+    </div>
+  </div>
+</a>

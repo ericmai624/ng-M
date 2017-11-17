@@ -3,6 +3,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { NgModule, enableProdMode } from '@angular/core';
 
+import { AppRoutingModule } from './/app-routing.module';
+
 import { AppComponent } from './app.component';
 import { NavComponent } from './components/nav/nav.component';
 import { SearchComponent } from './components/search/search.component';
@@ -10,8 +12,8 @@ import { MovieListComponent } from './components/movie/movie-list/movie-list.com
 import { MovieService } from './components/movie/movie.service';
 import { MovieDetailComponent } from './components/movie/movie-detail/movie-detail.component';
 import { HomepageComponent } from './components/homepage/homepage.component';
+import { MovieListEntryComponent } from './components/movie/movie-list/movie-list-entry/movie-list-entry.component';
 
-import { AppRoutingModule } from './/app-routing.module';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,8 @@ import { AppRoutingModule } from './/app-routing.module';
     SearchComponent,
     HomepageComponent,
     MovieListComponent,
-    MovieDetailComponent
+    MovieDetailComponent,
+    MovieListEntryComponent
   ],
   imports: [
     BrowserModule,

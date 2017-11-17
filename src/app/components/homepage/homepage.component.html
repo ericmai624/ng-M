@@ -7,11 +7,8 @@
 </div>
 <div class="title">{{title}}</div>
 <hr width="5%" align="center" color="#E19771">
-<div class="movie-list">
-  <div *ngIf="loading" class="spinner"></div>
-  <app-movie-list 
-    *ngFor="let movie of movies" 
-    [movie]="movie"
-  >
-  </app-movie-list>
-</div>
+<div *ngIf="fetching" class="spinner"></div>
+<app-movie-list
+  (fetchingMovie)="onFetchingMovies($event)"
+>
+</app-movie-list>

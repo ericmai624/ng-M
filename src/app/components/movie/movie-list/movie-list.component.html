@@ -1,10 +1,7 @@
-<a [routerLink]="'/movie/' + updateInfoUrl(movie.title)">
-  <div class="movie">
-    <div class="movie-image">
-      <img [src]="poster" alt="" width="100%" height="auto"/>
-    </div>
-    <div class="movie-info">
-      {{movie.title}}
-    </div>
-  </div>
-</a>
+<div class="movie-list">
+  <app-movie-list-entry
+    *ngFor = "let movie of movies"
+    [movie] = "movie"
+  >
+  </app-movie-list-entry>
+</div>
