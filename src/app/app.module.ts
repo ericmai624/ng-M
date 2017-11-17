@@ -7,10 +7,10 @@ import { AppComponent } from './app.component';
 import { NavComponent } from './components/nav/nav.component';
 import { SearchComponent } from './components/search/search.component';
 import { MovieListComponent } from './components/movie/movie-list/movie-list.component';
-
 import { MovieService } from './components/movie/movie.service';
-import { MovieInfoComponent } from './components/movie/movie-info/movie-info.component';
+import { MovieDetailComponent } from './components/movie/movie-detail/movie-detail.component';
 import { HomepageComponent } from './components/homepage/homepage.component';
+
 import { AppRoutingModule } from './/app-routing.module';
 
 @NgModule({
@@ -18,9 +18,9 @@ import { AppRoutingModule } from './/app-routing.module';
     AppComponent,
     NavComponent,
     SearchComponent,
+    HomepageComponent,
     MovieListComponent,
-    MovieInfoComponent,
-    HomepageComponent
+    MovieDetailComponent
   ],
   imports: [
     BrowserModule,

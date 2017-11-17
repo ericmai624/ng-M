@@ -13,19 +13,34 @@ export class MovieListComponent implements OnInit {
   constructor(private movieService: MovieService) { }
 
   ngOnInit() { 
-    this.getPoster();
+    this.getPoster(this.movie.poster_path);
   }
 
-  getPoster() {
-    this.movieService.fetchPoster(this.movie.poster_path).subscribe(
+  getPoster(link: string) {
+    this.movieService.fetchPoster(link).subscribe(
       (data: string) => {
         this.poster = data;
       },
 
       (err: string) => {
+        this.poster = '/assets/icons/icons8-popcorn-time.png';
         console.log(err);
       }
     );
+  }
+
+  updateInfoUrl(title) {
+    let result = '';
+
+    for (let i = 0; i < title.length; i++) {
+      if (result[result.length - 1] === ':') {
+        result += title[i].match(/\s/) ? '' : title[i];
+      } else {
+        result += title[i].match(/\s/) ? '-' : title[i];
+      }
+    }
+
+    return result;
   }
 
 }

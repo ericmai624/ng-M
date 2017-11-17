@@ -40,7 +40,7 @@
     "express": "^4.16.2",
     "express-session": "^1.15.6",
     "lodash": "^4.17.4",
-    "mongoose": "^4.13.1",
+    "mongoose": "^4.13.3",
     "node-schedule": "^1.2.5",
     "request": "^2.83.0",
     "request-promise": "^4.2.2",
@@ -49,9 +49,9 @@
     "zone.js": "^0.8.14"
   },
   "devDependencies": {
-    "@types/jasmine": "~2.6.3",
+    "@types/jasmine": "~2.8.2",
     "@types/jasminewd2": "~2.0.2",
-    "@types/node": "~8.0.50",
+    "@types/node": "~8.0.53",
     "codelyzer": "~4.0.1",
     "jasmine-core": "~2.8.0",
     "jasmine-spec-reporter": "~4.2.1",
