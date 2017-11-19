@@ -1,12 +1,11 @@
 const router = require('express').Router();
 const { MovieController } = require('../controller');
 
-router.route('/')
-  .get(MovieController.fetchMovies)
-  .post()
-;
+router.get('/', MovieController.fetchMovies);
 
-router.get('/poster', MovieController.fetchPoster);
+router.get('/image', MovieController.fetchImage);
+
+router.get('/:id', MovieController.fetchMovieById);
 
 router.get('/search', MovieController.fetchMoviesWithKeyword);
 

@@ -3,12 +3,15 @@ const path = require('path');
 const request = require('request-promise');
 const config = require('config')['themoviedb'];
 
+const apiHost = config.hostname || process.env.TMDB_API_HOST;
+const apiKey = config.apiKey || process.env.TMDB_API_KEY;
+
 const schedule = require('node-schedule');
 const recurringRule = new schedule.RecurrenceRule();
 
 const worker = schedule.scheduleJob({ hour: 5, minute: 0 }, () => {
   console.log('worker started...');
-  request.get(`${config.hostname}/3/configuration`, { qs: { api_key: config.apiKey } })
+  request.get(`${host}/3/configuration`, { qs: { api_key: apiKey } })
     .then(body => {
       let time = (new Date()).toLocaleTimeString();
       let configuration = JSON.parse(body);

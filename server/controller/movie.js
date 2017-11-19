@@ -7,12 +7,14 @@ const chalk = require('chalk');
 const config = require('config')['themoviedb'];
 
 const readFileAsync = Promise.promisify(fs.readFile);
+const apiHost = config.hostname || process.env.TMDB_API_HOST;
+const apiKey = config.apiKey || process.env.TMDB_API_KEY;
 
 module.exports.fetchMovies = (req, res) => {
   const options = {
-    uri: `${config.hostname}/3/discover/movie`,
+    uri: `${apiHost}/3/discover/movie`,
     qs: {
-      api_key: config.apiKey,
+      api_key: apiKey,
       language: 'en-US',
       region: 'US',
       sort_by: 'popularity.desc',
@@ -27,11 +29,26 @@ module.exports.fetchMovies = (req, res) => {
     .catch((err) => console.log(chalk.red('error in fetch movies promise chain: ' + err)));
 };
 
+module.exports.fetchMovieById = (req, res) => {
+  const id = req.params.id;
+  const options = {
+    uri: `${apiHost}/3/movie/${id}`,
+    qs: { api_key: apiKey }
+  };
+
+  request(options) 
+    .then(body => res.send(body))
+    .catch(err => {
+      console.log(chalk.red('error fetching movie with id: ', id, err));
+      res.sendStatus(400);
+    });
+};
+
 module.exports.fetchMoviesWithKeyword = (req, res) => {
   const options = {
-    uri: `${config.hostname}/3/search/movie`,
+    uri: `${apiHost}/3/search/movie`,
     qs: {
-      api_key: config.apiKey,      
+      api_key: apiKey,      
       query: req.query.keyword,
       include_adult: false
     }    
@@ -48,8 +65,9 @@ module.exports.fetchMoviesWithKeyword = (req, res) => {
   ;
 };
 
-module.exports.fetchPoster = (req, res) => {
+module.exports.fetchImage = (req, res) => {
   const link = req.query.link;
+  const type = req.query.type;
 
   if (link === 'null') {
     return res.sendStatus(400);
@@ -58,10 +76,10 @@ module.exports.fetchPoster = (req, res) => {
   readFileAsync(path.join(__dirname + '/../../worker/config.txt'))
     .then((file) => {
       let configuration = JSON.parse(file);
-      let uri = configuration.images.secure_base_url
-              + configuration.images.poster_sizes[4]
-              + link
-      ;
+      let sizes = configuration.images[`${type}_sizes`];
+
+      let uri = configuration.images.secure_base_url + sizes[3] + link;
+
       let resolveWithFullResponse = true;
       let encoding = 'binary';
       return request({ uri, resolveWithFullResponse, encoding });

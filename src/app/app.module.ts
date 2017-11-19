@@ -14,7 +14,6 @@ import { MovieDetailComponent } from './components/movie/movie-detail/movie-deta
 import { HomepageComponent } from './components/homepage/homepage.component';
 import { MovieListEntryComponent } from './components/movie/movie-list/movie-list-entry/movie-list-entry.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,

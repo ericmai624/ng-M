@@ -1,0 +1,29 @@
+.custom {
+  position: absolute;
+  left: 0;
+  top: 10%;
+  width: 100vw;
+  height: 530px;
+}
+
+.backdrop {
+  z-index: -1;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  filter: grayscale(100%);
+}
+
+.content {
+  display: grid;
+  grid-template-columns: 16.66% 300px 1fr 16.66%;
+  grid-template-rows: auto;
+}
+
+.poster {
+  grid-column: 2;
+  display: flex;
+  align-items: center;
+  min-width: 300px;
+  height: 100%;
+}

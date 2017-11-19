@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
-import { MovieService } from '../movie.service';
+import { Movie, MovieService } from '../movie.service';
 
 @Component({
   selector: 'app-movie-list',
@@ -8,12 +8,11 @@ import { MovieService } from '../movie.service';
   styleUrls: ['./movie-list.component.css']
 })
 export class MovieListComponent implements OnInit {
-  movies: object;
+  movies: Movie[];
   poster: string;
   @Output() fetchingMovie: EventEmitter<boolean>;
   
   constructor(private movieService: MovieService) { 
-    this.movies = [];
     this.fetchingMovie = new EventEmitter();
   }
 
@@ -32,7 +31,7 @@ export class MovieListComponent implements OnInit {
       err => {
         console.log(err);
       }
-    )
+    );
   }
 
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { MovieService } from '../../movie.service';
+import { Movie, MovieService } from '../../movie.service';
 
 @Component({
   selector: 'app-movie-list-entry',
@@ -18,7 +18,7 @@ export class MovieListEntryComponent implements OnInit {
   }
 
   getPoster(link: string) {
-    this.movieService.fetchPoster(link).subscribe(
+    this.movieService.fetchImage(link, 'poster').subscribe(
       (data: string) => {
         this.poster = data;
       },
@@ -44,20 +44,4 @@ export class MovieListEntryComponent implements OnInit {
     return result;
   }
 
-}
-
-interface Movie {
-  vote_count: number,
-  id: number,
-  video: boolean,
-  title: string,
-  popularity: number,
-  poster_path: string,
-  original_language: string,
-  original_title: string,
-  genre_ids: number[],
-  backdrop_path: string,
-  adult: boolean,
-  overview: string,
-  release_date: string,
 }
