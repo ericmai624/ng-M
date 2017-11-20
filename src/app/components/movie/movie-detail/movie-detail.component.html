@@ -4,4 +4,21 @@
   <div class="poster">
     <img [src]="poster" alt="" width="100%" height="auto"/>
   </div>
+  <div class="detail">
+    <section>
+      <h2>
+        <a [href]="'/movie/' + movie.id + '/' + urlTitle">{{movie.title}}</a>
+        <span> ({{getReleaseYear()}})</span>
+      </h2>
+    </section>
+    <ul class="rating">
+      <li>douban</li>
+      <li>imdb</li>
+      <li>{{movie.imdb_id}}</li>
+    </ul>
+    <section>
+      <h3>Overview</h3>
+      <p>{{movie.overview}}</p>
+    </section>
+  </div>
 </div>

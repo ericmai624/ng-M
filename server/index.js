@@ -4,12 +4,16 @@ const middleware = require('./middleware');
 const routes = require('./routes');
 const app = express();
 const port = process.env.PORT || 8080;
+const dist = path.join(__dirname + '/../dist/');
 require('../worker');
 
 app.use(middleware.bodyParser.json());
 app.use(middleware.bodyParser.urlencoded({ extended: true }));
 
-app.use(express.static(path.join(__dirname + '/../dist/')));
+app.engine('html', require('ejs').renderFile); // use ejs renderFile to compile html
+app.use(express.static(dist));
+
+app.use('/movie', (req, res) => res.render(dist + 'index.html'));
 
 app.use('/api/movies', middleware.setHeaders, routes.movies);
 

@@ -94,3 +94,25 @@ module.exports.fetchImage = (req, res) => {
       res.sendStatus(404);
     });
 };
+
+module.exports.fetchDoubanRating = (req, res) => {
+  const id = req.params.id;
+  const options = {
+    uri: 'https://api.douban.com/v2/movie/search',
+    qs: { q: id }
+  };
+  
+  request(options)
+    .then((body) => {
+      const responseObj = JSON.parse(body);
+      if (!responseObj.total || !responseObj.subjects.length) {
+        return res.sendStatus(204);
+      }
+      const rating = responseObj.subjects[0].rating;
+      res.send(JSON.stringify(rating));
+    })
+    .catch((err) => {
+      chalk.red('err fetching douban details: ', err);
+      res.sendStatus(400);
+    });
+};

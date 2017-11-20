@@ -11,9 +11,11 @@ import { Movie, MovieService } from '../movie.service';
 })
 export class MovieDetailComponent implements OnInit {
   movie: Movie;
+  doubanRating: object;
   background: object;
   backdrop: object;
   poster: string;
+  urlTitle: string;
 
   constructor(private route: ActivatedRoute, private movieService: MovieService) { 
     this.background = {
@@ -25,6 +27,7 @@ export class MovieDetailComponent implements OnInit {
     this.route.data.subscribe(data => {
       this.movie = data.movie;
       this.fetchBackdropAndPoster(this.movie);
+      this.urlTitle = this.movieService.updateUrl(this.movie.title);
     });
   }
 
@@ -40,6 +43,18 @@ export class MovieDetailComponent implements OnInit {
       this.poster = data;
     }, (err) => {
       this.poster = '';
+    });
+  }
+
+  getReleaseYear() {
+    return this.movie.release_date.substring(0, 4);
+  }
+
+  getDoubanRating(id: string) {
+    this.movieService.fetchDouBanRating(id).subscribe((data: object) => {
+      this.doubanRating = data;
+    }, (err: string) => {
+      console.log(err);
     });
   }
 
