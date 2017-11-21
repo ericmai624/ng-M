@@ -9,7 +9,6 @@ import { Movie, MovieService } from '../movie.service';
 })
 export class MovieListComponent implements OnInit {
   movies: Movie[];
-  poster: string;
   @Output() fetchingMovie: EventEmitter<boolean>;
   
   constructor(private movieService: MovieService) { 
@@ -22,16 +21,12 @@ export class MovieListComponent implements OnInit {
 
   fetchMovies() {
     this.fetchingMovie.emit(true);
-    this.movieService.fetchMovies().subscribe(
-      data => {
-        this.fetchingMovie.emit(false);
-        this.movies = data['results'];
-      },
-
-      err => {
-        console.log(err);
-      }
-    );
+    this.movieService.fetchMovies().subscribe((data) => {
+      this.fetchingMovie.emit(false);
+      this.movies = data['results'];
+    }, (err) => {
+      console.log(err);
+    });
   }
 
 }

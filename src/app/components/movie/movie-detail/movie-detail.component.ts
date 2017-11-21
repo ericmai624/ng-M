@@ -11,16 +11,21 @@ import { Movie, MovieService } from '../movie.service';
 })
 export class MovieDetailComponent implements OnInit {
   movie: Movie;
-  doubanRating: object;
+  doubanRating: number;
+  imdbRating: number;
+  rottenTomatosRating: number;
   background: object;
   backdrop: object;
   poster: string;
   urlTitle: string;
 
-  constructor(private route: ActivatedRoute, private movieService: MovieService) { 
+  constructor(private route: ActivatedRoute, private movieService: MovieService) {
     this.background = {
-      'background-image': 'radial-gradient(circle at 20% 50%, rgba(94.12%, 69.41%, 3.92%, 0.94) 0%, rgba(83.14%, 43.92%, 0.00%, 0.94) 100%)',    
-    }
+      'background-image': 'radial-gradient('
+                          + 'circle at 20% 50%,'
+                          + 'rgba(94.12%, 69.41%, 3.92%, 0.94) 0%,'
+                          + 'rgba(83.14%, 43.92%, 0.00%, 0.94) 100%)' 
+    };
   }
 
   ngOnInit() {
@@ -28,6 +33,8 @@ export class MovieDetailComponent implements OnInit {
       this.movie = data.movie;
       this.fetchBackdropAndPoster(this.movie);
       this.urlTitle = this.movieService.updateUrl(this.movie.title);
+      this.getDoubanRating(this.movie.imdb_id);
+      this.getOMDBRatings(this.movie.imdb_id);
     });
   }
 
@@ -52,7 +59,17 @@ export class MovieDetailComponent implements OnInit {
 
   getDoubanRating(id: string) {
     this.movieService.fetchDouBanRating(id).subscribe((data: object) => {
-      this.doubanRating = data;
+      this.doubanRating = data['average'];
+    }, (err: string) => {
+      console.log(err);
+    });
+  }
+
+  getOMDBRatings(id: string) {
+    this.movieService.fetchOMDBDetail(id).subscribe((data: object) => {
+      let rottenTomatosRatingStr = data['Ratings'][1]['Value'];
+      this.imdbRating = Number(data['imdbRating']);
+      this.rottenTomatosRating = Number(rottenTomatosRatingStr.slice(0, -1)) / 10;
     }, (err: string) => {
       console.log(err);
     });

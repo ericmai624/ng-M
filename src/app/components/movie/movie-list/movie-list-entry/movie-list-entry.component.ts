@@ -15,6 +15,9 @@ export class MovieListEntryComponent implements OnInit {
   constructor(private movieService: MovieService) { }
 
   ngOnInit() {
+    if (!this.movie.poster_path) {
+      console.log('no poster path');
+    }
     this.getPoster(this.movie.poster_path);
     this.urlTitle = this.movieService.updateUrl(this.movie.title);    
   }

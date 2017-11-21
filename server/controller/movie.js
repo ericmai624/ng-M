@@ -4,17 +4,19 @@ const path = require('path');
 const Promise = require('bluebird');
 const chalk = require('chalk');
 
-const config = require('config')['themoviedb'];
+const config = require('config');
 
 const readFileAsync = Promise.promisify(fs.readFile);
-const apiHost = config.hostname || process.env.TMDB_API_HOST;
-const apiKey = config.apiKey || process.env.TMDB_API_KEY;
+const tmdb_apiHost = config.themoviedb.hostname || process.env.TMDB_API_HOST;
+const tmdb_apiKey = config.themoviedb.apiKey || process.env.TMDB_API_KEY;
+const omdb_apiHost = config.omdb.hostname || process.env.OMDB_API_HOST;
+const omdb_apiKey = config.omdb.apiKey || process.env.OMDB_API_KEY;
 
 module.exports.fetchMovies = (req, res) => {
   const options = {
-    uri: `${apiHost}/3/discover/movie`,
+    uri: `${tmdb_apiHost}/3/discover/movie`,
     qs: {
-      api_key: apiKey,
+      api_key: tmdb_apiKey,
       language: 'en-US',
       region: 'US',
       sort_by: 'popularity.desc',
@@ -32,8 +34,8 @@ module.exports.fetchMovies = (req, res) => {
 module.exports.fetchMovieById = (req, res) => {
   const id = req.params.id;
   const options = {
-    uri: `${apiHost}/3/movie/${id}`,
-    qs: { api_key: apiKey }
+    uri: `${tmdb_apiHost}/3/movie/${id}`,
+    qs: { api_key: tmdb_apiKey }
   };
 
   request(options) 
@@ -77,8 +79,11 @@ module.exports.fetchImage = (req, res) => {
     .then((file) => {
       let configuration = JSON.parse(file);
       let sizes = configuration.images[`${type}_sizes`];
-
-      let uri = configuration.images.secure_base_url + sizes[3] + link;
+      let size = 2;
+      if (type === 'poster') {
+        size = 4;
+      }
+      let uri = configuration.images.secure_base_url + sizes[size] + link;
 
       let resolveWithFullResponse = true;
       let encoding = 'binary';
@@ -113,6 +118,24 @@ module.exports.fetchDoubanRating = (req, res) => {
     })
     .catch((err) => {
       chalk.red('err fetching douban details: ', err);
+      res.sendStatus(400);
+    });
+};
+
+module.exports.fetchOMDBDetail = (req, res) => {
+  const id = req.params.id;
+  const options = {
+    uri: `${omdb_apiHost}/`,
+    qs: {
+      apikey: omdb_apiKey,
+      i: id
+    }
+  };
+
+  request(options)
+    .then((body) => res.send(body))
+    .catch((err) => {
+      console.log(chalk.red('err getting omdb details: ', err));
       res.sendStatus(400);
     });
 };

@@ -31,6 +31,10 @@ export class MovieService {
     return this.http.get(`${this.domain}/api/movies/douban/${id}`);
   }
 
+  fetchOMDBDetail(id: string) {
+    return this.http.get(`${this.domain}/api/movies/omdb/${id}`);
+  }
+
   updateUrl(title) {
     let result = '';
 

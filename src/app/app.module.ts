@@ -13,6 +13,7 @@ import { MovieService } from './components/movie/movie.service';
 import { MovieDetailComponent } from './components/movie/movie-detail/movie-detail.component';
 import { HomepageComponent } from './components/homepage/homepage.component';
 import { MovieListEntryComponent } from './components/movie/movie-list/movie-list-entry/movie-list-entry.component';
+import { CircleRatingComponent } from './components/movie/rating/circle-rating/circle-rating.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { MovieListEntryComponent } from './components/movie/movie-list/movie-lis
     HomepageComponent,
     MovieListComponent,
     MovieDetailComponent,
-    MovieListEntryComponent
+    MovieListEntryComponent,
+    CircleRatingComponent
   ],
   imports: [
     BrowserModule,

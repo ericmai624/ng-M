@@ -1,7 +1,7 @@
 <a [routerLink]="'/movie/' + movie.id + '/' + urlTitle">
   <div class="movie">
     <div class="movie-image">
-      <img [src]="poster" alt="" width="100%" height="auto"/>
+      <img *ngIf="poster" [src]="poster" alt="" width="100%" height="auto"/>
     </div>
     <div class="movie-info">
       {{movie.title}}

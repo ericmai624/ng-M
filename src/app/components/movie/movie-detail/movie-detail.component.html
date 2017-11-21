@@ -2,7 +2,7 @@
 <div class="custom backdrop" [ngStyle]="backdrop"></div>
 <div class="custom content">
   <div class="poster">
-    <img [src]="poster" alt="" width="100%" height="auto"/>
+    <img *ngIf="poster" [src]="poster" alt="" width="100%" height="auto"/>
   </div>
   <div class="detail">
     <section>
@@ -12,9 +12,38 @@
       </h2>
     </section>
     <ul class="rating">
-      <li>douban</li>
-      <li>imdb</li>
-      <li>{{movie.imdb_id}}</li>
+      <li>
+        <app-circle-rating 
+          [rating]="movie.vote_average"
+          [rgb]="'98, 204, 130'"
+        >
+        </app-circle-rating>
+        <div>TMDB</div>
+      </li>
+      <li>
+          <app-circle-rating 
+          [rating]="imdbRating"
+          [rgb]="'237, 201, 35'"          
+        >
+        </app-circle-rating>  
+        <div>IMDB</div> 
+      </li>
+      <li>
+          <app-circle-rating 
+          [rating]="rottenTomatosRating"
+          [rgb]="'234, 27, 35'"          
+        >
+        </app-circle-rating>
+        <div>Rotten<br/>Tomatoes</div> 
+      </li>
+      <li>
+        <app-circle-rating 
+          [rating]="doubanRating"
+          [rgb]="'68, 139, 199'"          
+        >
+        </app-circle-rating>  
+        <div>DOUBAN</div>        
+      </li>
     </ul>
     <section>
       <h3>Overview</h3>
