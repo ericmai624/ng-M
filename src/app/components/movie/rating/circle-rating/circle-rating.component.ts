@@ -73,13 +73,14 @@ export class CircleRatingComponent implements OnInit {
       ctx.lineCap = 'round';
       ctx.strokeStyle = `rgba(${this.rgb}, 1)`;
       ctx.stroke();
+      
+      if (this.endAngle < Math.PI * 2 * Number(this.rating) / 10) {
+        setTimeout(() => {
+          this.drawRating();
+        }, 5);
+      }
     }
 
-    if (this.endAngle < Math.PI * 2 * Number(this.rating) / 10) {
-      setTimeout(() => {
-        this.drawRating();
-      }, 5);
-    }
   }
 
 }

@@ -67,9 +67,11 @@ export class MovieDetailComponent implements OnInit {
 
   getOMDBRatings(id: string) {
     this.movieService.fetchOMDBDetail(id).subscribe((data: object) => {
-      let rottenTomatosRatingStr = data['Ratings'][1]['Value'];
       this.imdbRating = Number(data['imdbRating']);
-      this.rottenTomatosRating = Number(rottenTomatosRatingStr.slice(0, -1)) / 10;
+      if (data['Ratings'].length > 1) {
+        let rottenTomatosRatingStr = data['Ratings'][1]['Value'];
+        this.rottenTomatosRating = Number(rottenTomatosRatingStr.slice(0, -1)) / 10;
+      }
     }, (err: string) => {
       console.log(err);
     });
