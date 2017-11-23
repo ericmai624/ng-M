@@ -1,26 +1,20 @@
-import { Component, OnInit, OnChanges, Input, ViewChild, ElementRef } from '@angular/core';
+import { Directive, Input, ElementRef, OnChanges } from '@angular/core';
 
-@Component({
-  selector: 'app-circle-rating',
-  templateUrl: './circle-rating.component.html',
-  styleUrls: ['./circle-rating.component.css']
+@Directive({
+  selector: '[appCanvasCircleRating]'
 })
-export class CircleRatingComponent implements OnInit {
-  @Input() rating: any;
+export class CanvasCircleRatingDirective {
+  @Input() rating: number;
   @Input() rgb: string;
-  @ViewChild('ratingCanvas') canvas: ElementRef
   endAngle: number;
 
-  constructor() { 
+  constructor(private canvas: ElementRef) { 
     this.endAngle = 0;
+    this.drawRating = this.drawRating.bind(this);
   }
 
-  ngOnInit() { }
-
   ngOnChanges() {
-    setTimeout(() => {
-      this.drawRating();
-    }, 5);
+    setTimeout(this.drawRating, 5);
   }
 
   drawRating() {
@@ -75,12 +69,9 @@ export class CircleRatingComponent implements OnInit {
       ctx.stroke();
       
       if (this.endAngle < Math.PI * 2 * Number(this.rating) / 10) {
-        setTimeout(() => {
-          this.drawRating();
-        }, 5);
+        setTimeout(this.drawRating, 5);
       }
     }
-
   }
 
 }

@@ -1,4 +1,4 @@
-<div [ngClass]="{'search-wrapper': true, 'focus': searchFocused}">
+<div [ngClass]="{'search-wrapper': true, 'focus': showSearchResults}">
   <app-search 
     (onSearchFocus)="onSearchFocus($event)"
     (onSearchSubmit)="onSearchSubmit($event)"
@@ -8,7 +8,13 @@
 <div class="title">{{title}}</div>
 <hr width="5%" align="center" color="#E19771">
 <div *ngIf="fetching" class="spinner"></div>
-<app-movie-list
-  (fetchingMovie)="onFetchingMovies($event)"
+<app-search-results
+  *ngIf="showSearchResults"
+  [results]="searchResults"
 >
+</app-search-results>
+<app-movie-list
+  *ngIf="!showSearchResults"
+  (fetchingMovie)="onFetchingMovies($event)"
+  >
 </app-movie-list>

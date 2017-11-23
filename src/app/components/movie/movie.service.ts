@@ -11,20 +11,16 @@ export class MovieService {
     this.domain = this.dev ? 'http://localhost:8080' : ''; 
   }
 
-  fetchMovieDetailById(id: string) {
-    return this.http.get(`${this.domain}/api/movies/${id}`);
-  }
-
   fetchMovies() {
     return this.http.get(`${this.domain}/api/movies`);
   }
 
-  fetchImage(link: string, type: string) {
-    return this.http.get(`${this.domain}/api/movies/image?link=${link}&type=${type}`);    
+  fetchMovieDetailById(id: string) {
+    return this.http.get(`${this.domain}/api/movies/tmdb/movie/${id}`);
   }
 
   fetchWithKeyword(keyword: string) {
-    return this.http.get(`${this.domain}/api/movies/search?keyword=${keyword}`);
+    return this.http.get(`${this.domain}/api/movies/tmdb/search?keyword=${keyword}`);
   }
 
   fetchDouBanRating(id: string) {
@@ -33,6 +29,10 @@ export class MovieService {
 
   fetchOMDBDetail(id: string) {
     return this.http.get(`${this.domain}/api/movies/omdb/${id}`);
+  }
+
+  getTMDBConfig() {
+    return this.http.get(`${this.domain}/api/movies/tmdb/config`);
   }
 
   updateUrl(title) {
@@ -51,6 +51,7 @@ export class MovieService {
 
 }
 
+// TMDB Movie Detail Obj
 export class Movie {
   vote_count: number;
   vote_average: number;
@@ -74,6 +75,23 @@ export class Movie {
   spoken_languages: object[];
   tagline: string;
   status: string;
+
+  constructor() { }
+}
+
+
+// TMDB Image Config
+export class Config {
+  images: {
+    base_url: string,
+    secure_base_url: string,
+    backdrop_sizes: string[],
+    logo_sizes: string[],
+    poster_sizes: string[],
+    profile_sizes: string[],
+    still_sizes: string[]
+  };
+  change_keys: string[];
 
   constructor() { }
 }

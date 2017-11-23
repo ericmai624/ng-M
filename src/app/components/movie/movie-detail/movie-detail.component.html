@@ -13,35 +13,47 @@
     </section>
     <ul class="rating">
       <li>
-        <app-circle-rating 
+        <canvas 
+          appCanvasCircleRating
           [rating]="movie.vote_average"
           [rgb]="'98, 204, 130'"
+          width="120px"
+          height="120px"
         >
-        </app-circle-rating>
+        </canvas>
         <div>TMDB</div>
       </li>
       <li>
-          <app-circle-rating 
+        <canvas 
+          appCanvasCircleRating
           [rating]="imdbRating"
-          [rgb]="'237, 201, 35'"          
+          [rgb]="'237, 201, 35'"
+          width="120px"
+          height="120px"
         >
-        </app-circle-rating>  
+        </canvas>
         <div>IMDB</div> 
       </li>
       <li>
-          <app-circle-rating 
-          [rating]="rottenTomatosRating"
+        <canvas 
+          appCanvasCircleRating
+          [rating]="rottenTomatoesRating"
           [rgb]="'234, 27, 35'"          
+          width="120px"
+          height="120px"
         >
-        </app-circle-rating>
+        </canvas>
         <div>Rotten<br/>Tomatoes</div> 
       </li>
       <li>
-        <app-circle-rating 
+        <canvas 
+          appCanvasCircleRating
           [rating]="doubanRating"
-          [rgb]="'68, 139, 199'"          
+          [rgb]="'68, 139, 199'" 
+          width="120px"
+          height="120px"
         >
-        </app-circle-rating>  
+        </canvas>
         <div>DOUBAN</div>        
       </li>
     </ul>

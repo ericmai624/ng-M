@@ -1,0 +1,23 @@
+<div class="search-result-entry">
+  <a [routerLink]="'/movie/' + movie.id + '/' + urlTitle">   
+    <div class="poster">
+      <img *ngIf="poster" [src]="poster" alt="" width="100%" height="100%"/>
+    </div>
+  </a>
+  <div class="main">
+    <div class="title">
+      <a [routerLink]="'/movie/' + movie.id + '/' + urlTitle">   
+        <h4>{{movie.title}}</h4>
+      </a>
+      <small>{{movie.release_date}}</small>
+    </div>
+    <div class="overview">
+      <p #overview>
+        {{movie.overview}}
+      </p>
+    </div>
+    <div class="ratings">
+
+    </div>
+  </div>
+</div>

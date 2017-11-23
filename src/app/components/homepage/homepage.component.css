@@ -5,7 +5,7 @@
   align-items: center;
   justify-content: center;
   height: 61.8vh;
-  transition: all 0.25s ease-out;  
+  /* transition: all 0.25s ease-out;   */
 }
 
 .focus {

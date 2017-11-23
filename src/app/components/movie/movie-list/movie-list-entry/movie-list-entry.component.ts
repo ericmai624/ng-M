@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { Movie, MovieService } from '../../movie.service';
+import { Movie, Config, MovieService } from '../../movie.service';
 
 @Component({
   selector: 'app-movie-list-entry',
@@ -23,12 +23,14 @@ export class MovieListEntryComponent implements OnInit {
   }
 
   getPoster(link: string) {
-    this.movieService.fetchImage(link, 'poster').subscribe((data: string) => {
-      this.poster = data;
-    }, (err: string) => {
-      this.poster = '/assets/icons/icons8-popcorn-time.png';
-      console.log(err);
-    });
+    let config: Config = JSON.parse(window.localStorage.getItem('tmdb_baseurl'));
+    if (!config) {
+      this.movieService.getTMDBConfig().subscribe((data: Config) => {
+        window.localStorage.setItem('tmdb_baseurl', JSON.stringify(data));
+        config = data;
+      });
+    }
+    this.poster = config.images.secure_base_url + config.images.poster_sizes[4] + link;
   }
 
 }

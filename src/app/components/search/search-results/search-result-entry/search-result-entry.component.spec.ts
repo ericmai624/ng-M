@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CircleRatingComponent } from './circle-rating.component';
+import { SearchResultEntryComponent } from './search-result-entry.component';
 
-describe('CircleRatingComponent', () => {
-  let component: CircleRatingComponent;
-  let fixture: ComponentFixture<CircleRatingComponent>;
+describe('SearchResultEntryComponent', () => {
+  let component: SearchResultEntryComponent;
+  let fixture: ComponentFixture<SearchResultEntryComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CircleRatingComponent ]
+      declarations: [ SearchResultEntryComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CircleRatingComponent);
+    fixture = TestBed.createComponent(SearchResultEntryComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

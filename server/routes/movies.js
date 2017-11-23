@@ -3,14 +3,14 @@ const { MovieController } = require('../controller');
 
 router.get('/', MovieController.fetchMovies);
 
-router.get('/image', MovieController.fetchImage);
+router.get('/tmdb/movie/:id', MovieController.fetchMovieById);
+
+router.get('/tmdb/config', MovieController.readTMDBConfigFile);
+
+router.get('/tmdb/search', MovieController.fetchMoviesWithKeyword);
 
 router.get('/douban/:id', MovieController.fetchDoubanRating);
 
 router.get('/omdb/:id', MovieController.fetchOMDBDetail);
-
-router.get('/:id', MovieController.fetchMovieById);
-
-router.get('/search', MovieController.fetchMoviesWithKeyword);
 
 module.exports = router;

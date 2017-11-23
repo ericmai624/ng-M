@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { NgStyle } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { Movie, MovieService } from '../movie.service';
+import { Movie, Config, MovieService } from '../movie.service';
+import { CanvasCircleRatingDirective } from '../canvas-circle-rating.directive';
 
 @Component({
   selector: 'app-movie-detail',
@@ -13,7 +14,7 @@ export class MovieDetailComponent implements OnInit {
   movie: Movie;
   doubanRating: number;
   imdbRating: number;
-  rottenTomatosRating: number;
+  rottenTomatoesRating: number;
   background: object;
   backdrop: object;
   poster: string;
@@ -39,18 +40,17 @@ export class MovieDetailComponent implements OnInit {
   }
 
   fetchBackdropAndPoster(movie) {
-    let backdrop = this.movieService.fetchImage(movie.backdrop_path, 'backdrop');
-    let poster = this.movieService.fetchImage(movie.poster_path, 'poster');
-
-    backdrop.subscribe((data: string) => {
-      this.backdrop = { 'background-image': `url(${data})` };
-    });
-
-    poster.subscribe((data: string) => {
-      this.poster = data;
-    }, (err) => {
-      this.poster = '';
-    });
+    let config: Config = JSON.parse(window.localStorage.getItem('tmdb_baseurl'));
+    if (!config) {
+      this.movieService.getTMDBConfig().subscribe((data: Config) => {
+        window.localStorage.setItem('tmdb_baseurl', JSON.stringify(data));
+        config = data;
+      });
+    }
+    this.poster = config.images.secure_base_url + config.images.poster_sizes[4] + movie.poster_path;
+    this.backdrop = {
+      'background-image': 'url(' + config.images.secure_base_url + config.images.backdrop_sizes[2] + movie.backdrop_path + ')';
+    }
   }
 
   getReleaseYear() {
@@ -68,7 +68,7 @@ export class MovieDetailComponent implements OnInit {
   getOMDBRatings(id: string) {
     this.movieService.fetchOMDBDetail(id).subscribe((data: object) => {
       this.imdbRating = data['imdbRating'];
-      this.rottenTomatosRating = data['rottenTomatoesRating'];
+      this.rottenTomatoesRating = data['rottenTomatoesRating'];
     }, (err: string) => {
       console.log(err);
     });

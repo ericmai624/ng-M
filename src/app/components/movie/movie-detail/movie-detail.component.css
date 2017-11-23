@@ -90,3 +90,8 @@ p {
   box-sizing: border-box;
 }
 
+canvas {
+  width: 60px;
+  height: 60px;
+}
+

@@ -45,54 +45,23 @@ module.exports.fetchMovieById = (req, res) => {
 
 module.exports.fetchMoviesWithKeyword = (req, res) => {
   const options = {
-    uri: `${apiHost}/3/search/movie`,
+    uri: `${tmdb_apiHost}/3/search/movie`,
     qs: {
-      api_key: apiKey,      
+      api_key: tmdb_apiKey,      
       query: req.query.keyword,
       include_adult: false
     }    
   };
 
   request(options)
-    .then(body => res.send(body))  
+    .then(body => {
+      res.send(body);
+    })  
     .catch(err => {
       console.log(chalk.red('err when fetching movie with keyword: ' + err));
       res.sendStatus(400);
     })
   ;
-};
-
-module.exports.fetchImage = (req, res) => {
-  const link = req.query.link;
-  const type = req.query.type;
-
-  if (link === 'null') {
-    return res.sendStatus(400);
-  }
-
-  readFileAsync(path.join(__dirname + '/../../worker/config.txt'))
-    .then((file) => {
-      let configuration = JSON.parse(file);
-      let sizes = configuration.images[`${type}_sizes`];
-      let size = 2;
-      if (type === 'poster') {
-        size = 4;
-      }
-      let uri = configuration.images.secure_base_url + sizes[size] + link;
-
-      let resolveWithFullResponse = true;
-      let encoding = 'binary';
-      return request({ uri, resolveWithFullResponse, encoding });
-    })
-    .then(response => {
-      let prefix = `data:${response.headers['content-type']};base64,`;
-      let base64 = Buffer.from(response.body, 'binary').toString('base64');
-      res.send(JSON.stringify(prefix + base64));
-    })
-    .catch(err => {
-      console.log(chalk.red('error fetching poster: ' + err));
-      res.sendStatus(404);
-    });
 };
 
 module.exports.fetchDoubanRating = (req, res) => {
@@ -151,5 +120,16 @@ module.exports.fetchOMDBDetail = (req, res) => {
       }
       console.log(chalk.red('err getting omdb details: ', err));
       res.sendStatus(400);
+    });
+};
+
+module.exports.readTMDBConfigFile = (req, res) => {
+  readFileAsync(path.join(__dirname + '/../../worker/config.txt'))
+    .then((data) => {
+      res.send(data);
+    })
+    .catch((err) => {
+      console.log(chalk.red('error reading tmdb config.txt: ', err));
+      res.sendStatus(500);
     });
 };
