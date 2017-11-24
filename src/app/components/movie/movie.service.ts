@@ -35,20 +35,6 @@ export class MovieService {
     return this.http.get(`${this.domain}/api/movies/tmdb/config`);
   }
 
-  updateUrl(title) {
-    let result = '';
-
-    for (let i = 0; i < title.length; i++) {
-      if (result[result.length - 1] === ':') {
-        result += title[i].match(/\s/) ? '' : title[i].toLowerCase();
-      } else {
-        result += title[i].match(/\s/) ? '-' : title[i].toLowerCase();
-      }
-    }
-
-    return result;
-  }
-
 }
 
 // TMDB Movie Detail Obj

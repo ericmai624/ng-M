@@ -107,7 +107,7 @@ module.exports.fetchOMDBDetail = (req, res) => {
       return request.get(`http://www.imdb.com/title/${id}`);
     })
     .then((html) => {
-      // omdb doesn't have imdb rating, get it from imdb.com
+      // if omdb doesn't have imdb rating, get it from imdb.com
       const $ = cheerio.load(html);
       const imdbRating = $('span', '.ratingValue').text(); // -> '7.6/10.0'
       response.imdbRating = Number(imdbRating.substring(0, imdbRating.indexOf('/')));

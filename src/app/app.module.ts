@@ -5,7 +5,12 @@ import { NgModule, enableProdMode } from '@angular/core';
 
 import { AppRoutingModule } from './/app-routing.module';
 
-import { CanvasCircleRatingDirective } from './components/movie/canvas-circle-rating.directive';
+import { CanvasCircleRatingDirective } from './directives/canvas-circle-rating.directive';
+import { MultilineEllipsisDirective } from './directives/multiline-ellipsis.directive';
+import { BackdropDirective } from './directives/backdrop.directive';
+import { PosterDirective } from './directives/poster.directive';
+
+import { MovieRouterlinkPipe } from './pipes/movie-routerlink.pipe';
 
 import { AppComponent } from './app.component';
 import { NavComponent } from './components/nav/nav.component';
@@ -18,6 +23,7 @@ import { MovieListEntryComponent } from './components/movie/movie-list/movie-lis
 import { SearchResultsComponent } from './components/search/search-results/search-results.component';
 import { SearchResultEntryComponent } from './components/search/search-results/search-result-entry/search-result-entry.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,7 +35,11 @@ import { SearchResultEntryComponent } from './components/search/search-results/s
     MovieListEntryComponent,
     SearchResultsComponent,
     SearchResultEntryComponent,
-    CanvasCircleRatingDirective
+    CanvasCircleRatingDirective,
+    MultilineEllipsisDirective,
+    BackdropDirective,
+    PosterDirective,
+    MovieRouterlinkPipe
   ],
   imports: [
     BrowserModule,

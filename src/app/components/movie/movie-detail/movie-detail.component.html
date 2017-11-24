@@ -1,13 +1,13 @@
 <div class="custom background" [ngStyle]="background"></div>
-<div class="custom backdrop" [ngStyle]="backdrop"></div>
+<div class="custom backdrop" appBackdrop [path]="movie.backdrop_path"></div>
 <div class="custom content">
   <div class="poster">
-    <img *ngIf="poster" [src]="poster" alt="" width="100%" height="auto"/>
+    <img appPoster [path]="movie.poster_path" alt="" width="100%" height="auto"/>
   </div>
   <div class="detail">
     <section>
       <h2>
-        <a [href]="'/movie/' + movie.id + '/' + urlTitle">{{movie.title}}</a>
+        <a [routerLink]="['/movie', movie.id, movie.title | movieRouterlink]">{{movie.title}}</a>
         <span> ({{getReleaseYear()}})</span>
       </h2>
     </section>

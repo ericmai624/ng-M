@@ -47,22 +47,6 @@ h4 {
   grid-row: 2;
   font-size: 0.9em;
   line-height: 1.2em;
-  height: 4.8em;
-  text-overflow: ellipsis;
+  height: 7em;
   overflow: hidden;
-  word-wrap: break-word;
-}
-
-.overview::before {
-  float: right;
-}
-
-.overview::after {
-  float: right;
-  position: relative;
-  top: -50px;
-  left: 100%;
-  width: 100px;
-  margin-left: -100%;
-  padding-right: 20px;
 }

@@ -3,7 +3,6 @@ import { NgStyle } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { Movie, Config, MovieService } from '../movie.service';
-import { CanvasCircleRatingDirective } from '../canvas-circle-rating.directive';
 
 @Component({
   selector: 'app-movie-detail',
@@ -16,9 +15,6 @@ export class MovieDetailComponent implements OnInit {
   imdbRating: number;
   rottenTomatoesRating: number;
   background: object;
-  backdrop: object;
-  poster: string;
-  urlTitle: string;
 
   constructor(private route: ActivatedRoute, private movieService: MovieService) {
     this.background = {
@@ -32,25 +28,9 @@ export class MovieDetailComponent implements OnInit {
   ngOnInit() {
     this.route.data.subscribe(data => {
       this.movie = data.movie;
-      this.fetchBackdropAndPoster(this.movie);
-      this.urlTitle = this.movieService.updateUrl(this.movie.title);
       this.getDoubanRating(this.movie.imdb_id);
       this.getOMDBRatings(this.movie.imdb_id);
     });
-  }
-
-  fetchBackdropAndPoster(movie) {
-    let config: Config = JSON.parse(window.localStorage.getItem('tmdb_baseurl'));
-    if (!config) {
-      this.movieService.getTMDBConfig().subscribe((data: Config) => {
-        window.localStorage.setItem('tmdb_baseurl', JSON.stringify(data));
-        config = data;
-      });
-    }
-    this.poster = config.images.secure_base_url + config.images.poster_sizes[4] + movie.poster_path;
-    this.backdrop = {
-      'background-image': 'url(' + config.images.secure_base_url + config.images.backdrop_sizes[2] + movie.backdrop_path + ')';
-    }
   }
 
   getReleaseYear() {
@@ -59,18 +39,18 @@ export class MovieDetailComponent implements OnInit {
 
   getDoubanRating(id: string) {
     this.movieService.fetchDouBanRating(id).subscribe((data: object) => {
-      this.doubanRating = data['average'];
-    }, (err: string) => {
-      console.log(err);
+      if (data) {
+        this.doubanRating = data['average'];
+      }
     });
   }
 
   getOMDBRatings(id: string) {
     this.movieService.fetchOMDBDetail(id).subscribe((data: object) => {
-      this.imdbRating = data['imdbRating'];
-      this.rottenTomatoesRating = data['rottenTomatoesRating'];
-    }, (err: string) => {
-      console.log(err);
+      if (data) {
+        this.imdbRating = data['imdbRating'];
+        this.rottenTomatoesRating = data['rottenTomatoesRating'];
+      }
     });
   }
 

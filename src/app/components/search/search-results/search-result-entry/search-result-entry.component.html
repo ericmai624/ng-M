@@ -1,18 +1,18 @@
 <div class="search-result-entry">
-  <a [routerLink]="'/movie/' + movie.id + '/' + urlTitle">   
+  <a [routerLink]="['/movie', movie.id, movie.title | movieRouterlink]">
     <div class="poster">
-      <img *ngIf="poster" [src]="poster" alt="" width="100%" height="100%"/>
+      <img appPoster [path]="movie.poster_path" alt="" width="100%" height="auto"/>
     </div>
   </a>
   <div class="main">
     <div class="title">
-      <a [routerLink]="'/movie/' + movie.id + '/' + urlTitle">   
+      <a [routerLink]="['/movie', movie.id, movie.title | movieRouterlink]">
         <h4>{{movie.title}}</h4>
       </a>
       <small>{{movie.release_date}}</small>
     </div>
     <div class="overview">
-      <p #overview>
+      <p appMultilineEllipsis [maxHeight]="86.5" [text]="movie.overview">
         {{movie.overview}}
       </p>
     </div>
