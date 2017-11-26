@@ -1,9 +1,8 @@
-import _ from 'lodash';
+import { extend } from 'lodash';
 
 import { Directive, ElementRef, Input, OnInit } from '@angular/core';
 
 import { Config, MovieService } from '../components/movie/movie.service';
-
 
 @Directive({
   selector: '[appPoster]'
@@ -16,13 +15,17 @@ export class PosterDirective implements OnInit {
   constructor(private el: ElementRef, private movieService: MovieService) { }
   
   ngOnInit() {
-    _.extend(this.style, {
+    const defaultStyle = {
       display: 'flex',
       alignItems: 'center',
-      justifyContent: 'center'
-    });
-    for (let prop in this.style) {
-      this.el.nativeElement.style[prop] = this.style[prop];
+      justifyContent: 'center',
+      background: 'rgba(0, 0, 0, 0.9)'
+    };
+
+    const customStyle = extend(defaultStyle, this.style || {}); // Copy component specific style to default style
+
+    for (let prop in customStyle) {
+      this.el.nativeElement.style[prop] = customStyle[prop];
     }
 
     let img = new Image();
@@ -30,11 +33,12 @@ export class PosterDirective implements OnInit {
     for (let prop in imgStyle) {
       img.style[prop] = imgStyle[prop];
     }
-    img.style.maxWidth = this.style['width']; // parent width
+    img.style.maxWidth = customStyle['width']; // parent width
     img.alt = '';
     this.el.nativeElement.append(img);
 
     if (!this.path) {
+      this.el.nativeElement.style.background = 'rgb(219, 219, 219)'; // Overwrite background color
       img.src = '/assets/icons/icons8-picture-96.png';
       return;
     }

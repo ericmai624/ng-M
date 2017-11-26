@@ -14,9 +14,8 @@ export class MovieListEntryComponent implements OnInit {
   constructor() { 
     this.posterStyle = {
       width: '150px',
-      height: '225px',
-      background: 'rgb(34, 34, 34)'
-    }
+      height: '225px'
+    };
   }
 
   ngOnInit() { }

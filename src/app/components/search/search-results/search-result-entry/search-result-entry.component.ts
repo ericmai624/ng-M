@@ -14,9 +14,8 @@ export class SearchResultEntryComponent implements OnInit {
   constructor() { 
     this.posterStyle = {
       width: (278 * 2 / 3) + 'px',
-      height: '278px',
-      background: 'rgb(219, 219, 219)'
-    }
+      height: '278px'
+    };
   }
 
   ngOnInit() { }

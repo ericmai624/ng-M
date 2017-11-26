@@ -25,16 +25,15 @@ export class MovieDetailComponent implements OnInit {
                           + 'rgba(94.12%, 69.41%, 3.92%, 0.94) 0%,'
                           + 'rgba(83.14%, 43.92%, 0.00%, 0.94) 100%)' 
     };
-
     this.posterStyle = {
       width: '300px',
       height: '100%',
       background: 'transparent'
-    }
+    };
     this.posterImgStyle = {
-      boxShadow: '0 0 4px rgba(0, 0, 0, 0.2)',
-      borderRadius: '4px'
-    }
+      borderRadius: '4px',
+      boxShadow: '0 0 4px rgba(0, 0, 0, 0.2)'
+    };
   }
 
   ngOnInit() {
