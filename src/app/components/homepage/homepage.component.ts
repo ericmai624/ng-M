@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NgClass } from '@angular/common';
 
+import { Router } from '@angular/router';
+
 import { Movie, MovieService } from '../movie/movie.service';
 
 @Component({
@@ -12,14 +14,12 @@ export class HomepageComponent implements OnInit {
   fetching: boolean;
   searchFocused: boolean;
   searchResults: Movie[];
-  showSearchResults: boolean;
   title: string;
   
-  constructor(private movieService: MovieService) {
+  constructor(private movieService: MovieService, private router: Router) {
     this.title = 'NOW PLAYING';
     this.searchFocused = false;
-    this.showSearchResults = false;
-    this.fetching = true;
+    this.fetching = false;
   }
   
   ngOnInit() { }
@@ -32,14 +32,8 @@ export class HomepageComponent implements OnInit {
     this.searchFocused = focused;
   }
 
-  onSearchSubmit(keyword: string) {
-    this.fetching = true;
-    this.showSearchResults = true;
-    this.movieService.fetchWithKeyword(keyword).subscribe((data: Movie[]) => {
-      this.fetching = false;
-      this.searchResults = data['results'];
-      this.title = 'SEARCH RESULTS';
-    }, (err: string) => console.log(err));
+  onSearchSubmit(query: string) {
+    this.router.navigate(['search', 'movie', query]);
   }
 
 }

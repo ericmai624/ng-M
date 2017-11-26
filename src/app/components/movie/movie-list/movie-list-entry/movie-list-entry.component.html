@@ -1,7 +1,10 @@
 <a [routerLink]="['/movie', movie.id, movie.title | movieRouterlink]">
   <div class="movie">
-    <div class="movie-image">
-      <img appPoster [path]="movie.poster_path" alt="" width="100%" height="auto"/>
+    <div class="movie-image"
+      appPoster
+      [path]="movie.poster_path"
+      [style]="posterStyle"
+    >
     </div>
     <div class="movie-info">
       {{movie.title}}

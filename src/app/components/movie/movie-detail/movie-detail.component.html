@@ -1,8 +1,12 @@
 <div class="custom background" [ngStyle]="background"></div>
 <div class="custom backdrop" appBackdrop [path]="movie.backdrop_path"></div>
 <div class="custom content">
-  <div class="poster">
-    <img appPoster [path]="movie.poster_path" alt="" width="100%" height="auto"/>
+  <div class="poster"
+    appPoster
+    [path]="movie.poster_path"
+    [style]="posterStyle"
+    [imgStyle]="posterImgStyle"
+  >
   </div>
   <div class="detail">
     <section>

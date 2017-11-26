@@ -1,7 +1,11 @@
 <div class="search-result-entry">
   <a [routerLink]="['/movie', movie.id, movie.title | movieRouterlink]">
-    <div class="poster">
-      <img appPoster [path]="movie.poster_path" alt="" width="100%" height="auto"/>
+    <div 
+      class="poster"
+      appPoster
+      [path]="movie.poster_path"
+      [style]="posterStyle"
+      >
     </div>
   </a>
   <div class="main">
@@ -9,7 +13,13 @@
       <a [routerLink]="['/movie', movie.id, movie.title | movieRouterlink]">
         <h4>{{movie.title}}</h4>
       </a>
+      <i class="fa fa-calendar" aria-hidden="true"></i>
       <small>{{movie.release_date}}</small>
+    </div>
+    <div class="genre">
+      <!-- <small *ngFor="let genre of movie">
+
+      </small> -->
     </div>
     <div class="overview">
       <p appMultilineEllipsis [maxHeight]="86.5" [text]="movie.overview">

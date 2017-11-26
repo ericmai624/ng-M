@@ -1,4 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
+import 'rxjs/add/operator/switchMap';
+import 'rxjs/add/operator/map';
+
+import { Component, OnInit } from '@angular/core';
+
+import { ActivatedRoute, ParamMap } from '@angular/router'
 
 import { Movie, MovieService } from '../../movie/movie.service';
 
@@ -8,10 +13,16 @@ import { Movie, MovieService } from '../../movie/movie.service';
   styleUrls: ['./search-results.component.css']
 })
 export class SearchResultsComponent implements OnInit {
-  @Input() results: Movie[];
+  results: Movie[];
 
-  constructor() { }
+  constructor(private route: ActivatedRoute, private movieService: MovieService) {  }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.route.paramMap.switchMap((params: ParamMap) => {
+      return this.movieService.fetchWithKeyword(params.get('query'));
+    }).subscribe((data) => {
+      this.results = data['results'];
+    }, (err) => console.log(err));
+  }
 
 }

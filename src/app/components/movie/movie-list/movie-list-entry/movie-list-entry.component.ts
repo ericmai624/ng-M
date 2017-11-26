@@ -9,8 +9,15 @@ import { Movie } from '../../movie.service';
 })
 export class MovieListEntryComponent implements OnInit {
   @Input() movie: Movie;  
+  posterStyle: object;
 
-  constructor() { }
+  constructor() { 
+    this.posterStyle = {
+      width: '150px',
+      height: '225px',
+      background: 'rgb(34, 34, 34)'
+    }
+  }
 
   ngOnInit() { }
 
