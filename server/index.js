@@ -15,6 +15,7 @@ app.use(express.static(dist));
 
 // Pages endpoints
 app.use('/movie', (req, res) => res.render(dist + 'index.html'));
+app.use('/search', (req, res) => res.render(dist + 'index.html'));
 
 // Data endpoints
 app.use('/api/movies', middleware.setHeaders, routes.movies);
