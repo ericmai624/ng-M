@@ -9,10 +9,12 @@ a {
   height: 265px;
   box-sizing: border-box;
 }
+
 .movie-image {
   box-sizing: border-box;
   overflow: hidden;
 }
+
 .movie-info {
   background: rgb(236, 236, 236);
   height: 40px;

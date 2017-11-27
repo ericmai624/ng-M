@@ -11,7 +11,7 @@ const recurringRule = new schedule.RecurrenceRule();
 
 const worker = schedule.scheduleJob({ hour: 5, minute: 0 }, () => {
   console.log('worker started...');
-  request.get(`${host}/3/configuration`, { qs: { api_key: apiKey } })
+  request.get(`${apiHost}/3/configuration`, { qs: { api_key: apiKey } })
     .then(body => {
       let time = (new Date()).toLocaleTimeString();
       let configuration = JSON.parse(body);

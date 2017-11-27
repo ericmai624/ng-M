@@ -13,10 +13,6 @@
   transition: all 0.25s ease-in;
 }
 
-.title {
-  text-align: center;
-}
-
 .spinner {
   position: absolute;
   left: 50%;

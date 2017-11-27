@@ -17,7 +17,6 @@ export class HomepageComponent implements OnInit {
   title: string;
   
   constructor(private movieService: MovieService, private router: Router) {
-    this.title = 'NOW PLAYING';
     this.searchFocused = false;
     this.fetching = false;
   }
