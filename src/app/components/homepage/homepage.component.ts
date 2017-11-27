@@ -13,7 +13,6 @@ import { Movie, MovieService } from '../movie/movie.service';
 export class HomepageComponent implements OnInit {
   fetching: boolean;
   searchFocused: boolean;
-  searchResults: Movie[];
   title: string;
   
   constructor(private movieService: MovieService, private router: Router) {
