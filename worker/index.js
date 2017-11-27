@@ -28,3 +28,7 @@ const worker = schedule.scheduleJob({ hour: 5, minute: 0 }, () => {
     })
   ;
 });
+
+setInterval(() => {
+  request.get('https://ng-m.herokuapp.com/');
+}, 1000 * 60 * 5);
