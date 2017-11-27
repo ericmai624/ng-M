@@ -40,16 +40,18 @@ export class PosterDirective implements OnInit {
     if (!this.path) {
       this.el.nativeElement.style.background = 'rgb(219, 219, 219)'; // Overwrite background color
       img.src = '/assets/icons/icons8-picture-96.png';
-      return;
+      return; // End of procedure
     }
+
     let config: Config = JSON.parse(window.localStorage.getItem('tmdb_baseurl'));
     if (!config) {
-      this.movieService.getTMDBConfig().subscribe((data: Config) => {
-        window.localStorage.setItem('tmdb_baseurl', JSON.stringify(data));
-        config = data;
+      this.movieService.getTMDBConfig().subscribe((response: Config) => {
+        window.localStorage.setItem('tmdb_baseurl', JSON.stringify(response));
+        img.src = response.images.secure_base_url + response.images.poster_sizes[4] + this.path;
       });
+    } else {
+      img.src = config.images.secure_base_url + config.images.poster_sizes[4] + this.path;      
     }
-    img.src = config.images.secure_base_url + config.images.poster_sizes[4] + this.path;
   }
 
 }
