@@ -1,7 +1,4 @@
 .root {
-  width: 100vw;
+  width: 100%;
   height: auto;
-  /* display: grid;
-  grid-template-columns: 16.66% repeat(3, 1fr) 16.66%;
-  grid-template-rows: auto 1fr; */
 }

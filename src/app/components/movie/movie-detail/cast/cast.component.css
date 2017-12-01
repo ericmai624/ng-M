@@ -19,11 +19,11 @@ p {
 
 .info {
   padding: 0.5em;
-  padding-bottom: 0;
-  height: 60px;
+  height: 4.8em;
   font-size: 0.9em;
   text-overflow: ellipsis;
   overflow: hidden;
+  line-height: 1.2em;
 }
 
 .name {
