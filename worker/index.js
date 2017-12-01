@@ -13,7 +13,7 @@ const worker = schedule.scheduleJob({ hour: 5, minute: 0 }, () => {
   console.log('worker started...');
   request.get(`${apiHost}/3/configuration`, { qs: { api_key: apiKey } })
     .then(body => {
-      let time = (new Date()).toLocaleTimeString();
+      let time = Date.now();
       let configuration = JSON.parse(body);
       configuration.lastUpdate = time;
       fs.writeFile(path.join(__dirname, 'config.txt'), JSON.stringify(configuration), (err) => {

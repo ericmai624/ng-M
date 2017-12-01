@@ -65,7 +65,6 @@ export class Movie {
   constructor() { }
 }
 
-
 // TMDB Image Config
 export class Config {
   images: {

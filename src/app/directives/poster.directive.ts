@@ -43,10 +43,10 @@ export class PosterDirective implements OnInit {
       return; // End of procedure
     }
 
-    let config: Config = JSON.parse(window.localStorage.getItem('tmdb_baseurl'));
-    if (!config) {
+    let config: Config = JSON.parse(window.localStorage.getItem('tmdb_config'));
+    if (!config || Date.now() - config['lastUpdate'] > 3 * 24 * 60 * 60 * 1000) {
       this.movieService.getTMDBConfig().subscribe((response: Config) => {
-        window.localStorage.setItem('tmdb_baseurl', JSON.stringify(response));
+        window.localStorage.setItem('tmdb_config', JSON.stringify(response));
         img.src = response.images.secure_base_url + response.images.poster_sizes[4] + this.path;
       });
     } else {

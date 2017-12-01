@@ -38,31 +38,7 @@
   box-sizing: border-box;
 }
 
-.rating {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.rating li {
-  float: left;
-  margin-left: 2rem;
-  display: flex;
-  align-items: center;
-  height: 60px;
-}
-
-.rating li:first-of-type {
-  margin-left: 0;
-}
-
-.rating li div {
-  margin-left: 5px;
-  font-size: 0.95em;
-}
-
 a {
-  text-decoration: none;
   color: white;
 }
 
@@ -81,9 +57,3 @@ p {
   font-size: 0.85em;
   box-sizing: border-box;
 }
-
-canvas {
-  width: 60px;
-  height: 60px;
-}
-

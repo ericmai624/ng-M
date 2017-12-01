@@ -32,7 +32,10 @@ module.exports.fetchMovieById = (req, res) => {
   const id = req.params.id;
   const options = {
     uri: `${tmdb_apiHost}/3/movie/${id}`,
-    qs: { api_key: tmdb_apiKey }
+    qs: { 
+      api_key: tmdb_apiKey,
+      append_to_response: 'videos,credits'
+    }
   };
 
   request(options) 
@@ -77,8 +80,10 @@ module.exports.fetchDoubanRating = (req, res) => {
       if (!responseObj.total || !responseObj.subjects.length) {
         return res.sendStatus(204);
       }
-      const rating = responseObj.subjects[0].rating;
-      res.send(JSON.stringify(rating));
+      const response = {};
+      response.rating = responseObj.subjects[0].rating;
+      response.id = responseObj.subjects[0].id;
+      res.send(JSON.stringify(response));
     })
     .catch((err) => {
       chalk.red('err fetching douban details: ', err);
@@ -87,7 +92,7 @@ module.exports.fetchDoubanRating = (req, res) => {
 };
 
 module.exports.fetchOMDBDetail = (req, res) => {
-  const response = {};
+  let response = null;
   const id = req.params.id;
   const options = {
     uri: `${omdb_apiHost}/`,
@@ -97,12 +102,9 @@ module.exports.fetchOMDBDetail = (req, res) => {
   request(options)
     .then((body) => {
       const detail = JSON.parse(body);
-      if (detail['Ratings'].length > 1) {
-        response.rottenTomatoesRating = Number(detail['Ratings'][1]['Value'].slice(0, -1)) / 10;
-      }
       if (detail.imdbRating !== 'N/A') {
-        response.imdbRating = Number(detail.imdbRating);
-        throw response; // skip the next promise chain
+        response = detail.imdbRating;
+        throw response; // skip the next promise then
       }
       return request.get(`http://www.imdb.com/title/${id}`);
     })
@@ -110,13 +112,13 @@ module.exports.fetchOMDBDetail = (req, res) => {
       // if omdb doesn't have imdb rating, get it from imdb.com
       const $ = cheerio.load(html);
       const imdbRating = $('span', '.ratingValue').text(); // -> '7.6/10.0'
-      response.imdbRating = Number(imdbRating.substring(0, imdbRating.indexOf('/')));
-      res.send(JSON.stringify(response));
+      response = imdbRating.substring(0, imdbRating.indexOf('/'));
+      res.send(response);
     })
     .catch((err) => {
       // no error, skip the promise chain above
-      if (response.imdbRating) {
-        return res.send(JSON.stringify(response));
+      if (response) {
+        return res.send(response);
       }
       console.log(chalk.red('err getting omdb details: ', err));
       res.sendStatus(400);

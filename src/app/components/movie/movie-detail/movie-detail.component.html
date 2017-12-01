@@ -15,52 +15,7 @@
         <span> ({{getReleaseYear()}})</span>
       </h2>
     </section>
-    <ul class="rating">
-      <li>
-        <canvas 
-          appCanvasCircleRating
-          [rating]="movie.vote_average"
-          [rgb]="'98, 204, 130'"
-          width="120px"
-          height="120px"
-        >
-        </canvas>
-        <div>TMDB</div>
-      </li>
-      <li>
-        <canvas 
-          appCanvasCircleRating
-          [rating]="imdbRating"
-          [rgb]="'237, 201, 35'"
-          width="120px"
-          height="120px"
-        >
-        </canvas>
-        <div>IMDB</div> 
-      </li>
-      <li>
-        <canvas 
-          appCanvasCircleRating
-          [rating]="rottenTomatoesRating"
-          [rgb]="'234, 27, 35'"          
-          width="120px"
-          height="120px"
-        >
-        </canvas>
-        <div>Rotten<br/>Tomatoes</div> 
-      </li>
-      <li>
-        <canvas 
-          appCanvasCircleRating
-          [rating]="doubanRating"
-          [rgb]="'68, 139, 199'" 
-          width="120px"
-          height="120px"
-        >
-        </canvas>
-        <div>DOUBAN</div>        
-      </li>
-    </ul>
+    <app-ratings [ratings]="ratings"></app-ratings>
     <section>
       <h3>Overview</h3>
       <p>{{movie.overview}}</p>

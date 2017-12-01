@@ -1,0 +1,35 @@
+<ul class="rating">
+    <li>
+      <canvas 
+        appCanvasCircleRating
+        [rating]="ratings[0].rating"
+        [rgb]="'98, 204, 130'"
+        width="120px"
+        height="120px"
+      >
+      </canvas>
+      <div><a [href]="ratings[0].link" target="_blank">TMDB</a></div>
+    </li>
+    <li>
+      <canvas 
+        appCanvasCircleRating
+        [rating]="ratings[1].rating"
+        [rgb]="'237, 201, 35'"
+        width="120px"
+        height="120px"
+      >
+      </canvas>
+      <div><a [href]="ratings[1].link" target="_blank">IMDB</a></div>
+    </li>
+    <li>
+      <canvas 
+        appCanvasCircleRating
+        [rating]="ratings[2].rating"
+        [rgb]="'68, 139, 199'" 
+        width="120px"
+        height="120px"
+      >
+      </canvas>
+      <div><a [href]="ratings[2].link" target="_blank">Douban</a></div>
+    </li>
+  </ul>

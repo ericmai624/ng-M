@@ -22,6 +22,7 @@ import { HomepageComponent } from './components/homepage/homepage.component';
 import { MovieListEntryComponent } from './components/movie/movie-list/movie-list-entry/movie-list-entry.component';
 import { SearchResultsComponent } from './components/search/search-results/search-results.component';
 import { SearchResultEntryComponent } from './components/search/search-results/search-result-entry/search-result-entry.component';
+import { RatingsComponent } from './components/movie/ratings/ratings.component';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import { SearchResultEntryComponent } from './components/search/search-results/s
     MultilineEllipsisDirective,
     BackdropDirective,
     PosterDirective,
-    MovieRouterlinkPipe
+    MovieRouterlinkPipe,
+    RatingsComponent
   ],
   imports: [
     BrowserModule,
