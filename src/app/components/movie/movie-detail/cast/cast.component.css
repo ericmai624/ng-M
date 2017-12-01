@@ -1,0 +1,32 @@
+p {
+  margin: 5px;
+  padding: 0;
+}
+
+.container {
+  display: grid;
+  width: 150px;
+  border: 1px solid #e3e3e3;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.profile-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 225px;
+}
+
+.info {
+  padding: 0.4em;
+  height: 68px;
+}
+
+.name {
+  font-weight: bold;
+}
+
+.character {
+  font-size: 0.9em;
+  color: rgb(11, 11, 11);
+}

@@ -14,15 +14,11 @@ export class BackdropDirective implements OnInit {
     if (!this.path) {
       return;
     }   
-    let config: Config = JSON.parse(window.localStorage.getItem('tmdb_baseurl'));
-    if (!config) {
-      this.movieService.getTMDBConfig().subscribe((data: Config) => {
-        window.localStorage.setItem('tmdb_baseurl', JSON.stringify(data));
-        config = data;
-      });
-    }
-    const url = config.images.secure_base_url + config.images.backdrop_sizes[2] + this.path;
-    this.el.nativeElement.style.backgroundImage = `url(${url})`;
+
+    this.movieService.getTMDBConfig((config) => {
+      const url = config.images.secure_base_url + config.images.backdrop_sizes[2] + this.path;
+      this.el.nativeElement.style.backgroundImage = `url(${url})`;
+    });
   }
 
 }

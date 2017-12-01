@@ -31,8 +31,16 @@ export class MovieService {
     return this.http.get(`${this.domain}/api/movies/omdb/${id}`);
   }
 
-  getTMDBConfig() {
-    return this.http.get(`${this.domain}/api/movies/tmdb/config`);
+  getTMDBConfig(callback) {
+    let config: Config = JSON.parse(window.localStorage.getItem('tmdb_config'));
+    if (!config || Date.now() - config['lastUpdate'] > 3 * 24 * 60 * 60 * 1000) {
+      this.http.get(`${this.domain}/api/movies/tmdb/config`).subscribe((data: Config) => {
+        window.localStorage.setItem('tmdb_config', JSON.stringify(data));
+        callback(data);
+      });
+    } else {
+      callback(config);
+    }
   }
 
 }
@@ -61,8 +69,13 @@ export class Movie {
   spoken_languages: object[];
   tagline: string;
   status: string;
-
-  constructor() { }
+  credits: {
+    cast: Cast[],
+    crew: object[]
+  };
+  videos: {
+    results: Video[]
+  }
 }
 
 // TMDB Image Config
@@ -77,6 +90,26 @@ export class Config {
     still_sizes: string[]
   };
   change_keys: string[];
+}
 
-  constructor() { }
+export class Cast {
+  cast_id: number;
+  character: string;
+  gender: number;
+  id: number;
+  name: string;
+  profile_path: string;
+  order: number;
+  credit_id: string;
+}
+
+export class Video {
+  id: string;
+  iso_639_1: string;
+  iso_3166_1: string;
+  key: string;
+  name: string;
+  site: string;
+  size: number;
+  type: string;
 }

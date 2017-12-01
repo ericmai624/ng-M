@@ -1,9 +1,13 @@
-<div class="search-wrapper">
-  <app-search 
-    (onSearchFocus)="onSearchFocus($event)"
-    (onSearchSubmit)="onSearchSubmit($event)"
-  >
-  </app-search>
+<div class="container">
+  <div class="search-wrapper">
+    <app-search 
+      (onSearchFocus)="onSearchFocus($event)"
+      (onSearchSubmit)="onSearchSubmit($event)"
+    >
+    </app-search>
+  </div>
+  <div *ngIf="fetching" class="spinner"></div>
+  <div class="wrapper">
+    <router-outlet></router-outlet>
+  </div>
 </div>
-<div *ngIf="fetching" class="spinner"></div>
-<router-outlet></router-outlet>

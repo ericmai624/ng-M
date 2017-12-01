@@ -1,24 +1,35 @@
-<div class="custom background" [ngStyle]="background"></div>
-<div class="custom backdrop" appBackdrop [path]="movie.backdrop_path"></div>
-<div class="custom content">
-  <div class="poster"
-    appPoster
-    [path]="movie.poster_path"
-    [style]="posterStyle"
-    [imgStyle]="posterImgStyle"
-  >
+<div class="container">
+  <div class="custom background" [ngStyle]="background"></div>
+  <div class="custom backdrop" appBackdrop [path]="movie.backdrop_path"></div>
+  <div class="custom content">
+    <div class="poster"
+      appPoster
+      [path]="movie.poster_path"
+      [style]="posterStyle"
+      [imgStyle]="posterImgStyle"
+    >
+    </div>
+    <div class="summary">
+      <section>
+        <h2>
+          <a [routerLink]="['/movie', movie.id, movie.title | movieRouterlink]">{{movie.title}}</a>
+          <span> ({{getReleaseYear()}})</span>
+        </h2>
+      </section>
+      <app-ratings [ratings]="ratings"></app-ratings>
+      <section>
+        <h3>Overview</h3>
+        <p>{{movie.overview}}</p>
+      </section>
+    </div>
   </div>
-  <div class="detail">
-    <section>
-      <h2>
-        <a [routerLink]="['/movie', movie.id, movie.title | movieRouterlink]">{{movie.title}}</a>
-        <span> ({{getReleaseYear()}})</span>
-      </h2>
-    </section>
-    <app-ratings [ratings]="ratings"></app-ratings>
-    <section>
-      <h3>Overview</h3>
-      <p>{{movie.overview}}</p>
-    </section>
+  <div class="details">
+    <h3>Top Cast</h3>
+    <div class="cast">
+      <app-cast
+        *ngFor="let cast of movie.credits.cast.slice(0, 5)"
+        [cast]="cast"
+      ></app-cast>
+    </div>
   </div>
 </div>

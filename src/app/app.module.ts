@@ -23,6 +23,8 @@ import { MovieListEntryComponent } from './components/movie/movie-list/movie-lis
 import { SearchResultsComponent } from './components/search/search-results/search-results.component';
 import { SearchResultEntryComponent } from './components/search/search-results/search-result-entry/search-result-entry.component';
 import { RatingsComponent } from './components/movie/ratings/ratings.component';
+import { CastComponent } from './components/movie/movie-detail/cast/cast.component';
+import { ProfileImageDirective } from './directives/profile-image.directive';
 
 
 @NgModule({
@@ -41,7 +43,9 @@ import { RatingsComponent } from './components/movie/ratings/ratings.component';
     BackdropDirective,
     PosterDirective,
     MovieRouterlinkPipe,
-    RatingsComponent
+    RatingsComponent,
+    CastComponent,
+    ProfileImageDirective
   ],
   imports: [
     BrowserModule,
