@@ -19,7 +19,6 @@ p {
 }
 
 .container {
-  width: 100vw;
   display: grid;
   grid-template-columns: calc(50vw - 500px) 1000px;
   grid-template-rows: calc(100vh * 0.06 + 19px) 530px auto;
@@ -72,5 +71,4 @@ p {
 .cast {
   display: flex;
   justify-content: space-between;
-  overflow-x: scroll;
 }
