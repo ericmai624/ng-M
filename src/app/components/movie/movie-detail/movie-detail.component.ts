@@ -38,7 +38,6 @@ export class MovieDetailComponent implements OnInit {
         link: `https://www.themoviedb.org/movie/${movie.id}`,
         rating: movie.vote_average
       };
-      console.log(movie);
     });
   }
 
