@@ -18,8 +18,12 @@ p {
 }
 
 .info {
-  padding: 0.4em;
-  height: 68px;
+  padding: 0.5em;
+  padding-bottom: 0;
+  height: 60px;
+  font-size: 0.9em;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .name {

@@ -34,6 +34,7 @@ export class PosterDirective implements OnInit {
       img.style[prop] = imgStyle[prop];
     }
     img.style.maxWidth = customStyle['width']; // parent width
+    img.style.maxHeight = customStyle['height']; // parent height
     img.alt = '';
     this.el.nativeElement.append(img);
 
