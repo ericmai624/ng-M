@@ -15,7 +15,6 @@ export class CastComponent implements OnInit {
     this.profileImgStyle['maxWidth'] = '150px';
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
 }

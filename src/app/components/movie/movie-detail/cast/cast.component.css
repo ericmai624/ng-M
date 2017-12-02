@@ -11,18 +11,12 @@ p {
 }
 
 .profile-image {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   height: 225px;
 }
 
 .info {
-  padding: 0.5em;
-  height: 4.8em;
+  padding: 10px;
   font-size: 0.9em;
-  text-overflow: ellipsis;
-  overflow: hidden;
   line-height: 1.2em;
 }
 
