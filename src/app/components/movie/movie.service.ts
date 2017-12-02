@@ -34,13 +34,12 @@ export class MovieService {
   getTMDBConfig(callback) {
     let config: Config = JSON.parse(window.localStorage.getItem('tmdb_config'));
     if (!config || Date.now() - config['lastUpdate'] > 3 * 24 * 60 * 60 * 1000) {
-      this.http.get(`${this.domain}/api/movies/tmdb/config`).subscribe((data: Config) => {
+      return this.http.get(`${this.domain}/api/movies/tmdb/config`).subscribe((data: Config) => {
         window.localStorage.setItem('tmdb_config', JSON.stringify(data));
-        callback(data);
+        return callback(data);
       });
-    } else {
-      callback(config);
-    }
+    } 
+    return callback(config);
   }
 
 }

@@ -30,7 +30,7 @@ p {
   height: 530px;
 }
 
-.backdrop {
+.background {
   z-index: -1;
   background-size: cover;
   background-repeat: no-repeat;
@@ -47,6 +47,8 @@ p {
 .poster {
   grid-column: 2;
   overflow: hidden;
+  border-radius: 4px;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
   z-index: 100;
 }
 

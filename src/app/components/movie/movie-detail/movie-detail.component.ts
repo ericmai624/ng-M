@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { NgStyle } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { Movie, Config, MovieService } from '../movie.service';
+
+// const Vibrant = require('node-vibrant'); // using this format because node-vibrant uses 'export =' format
 
 @Component({
   selector: 'app-movie-detail',
@@ -11,31 +12,23 @@ import { Movie, Config, MovieService } from '../movie.service';
 })
 export class MovieDetailComponent implements OnInit {
   movie: Movie
-  background: object = {};
-  posterStyle: object = {};
-  posterImgStyle: object = {};
   ratings: object[];
 
-  constructor(private route: ActivatedRoute, private movieService: MovieService) {
-    this.posterStyle['width'] = '300px';
-    this.posterStyle['height'] = '100%';
-    this.posterStyle['background'] = 'transparent';
-
-    this.posterImgStyle['borderRadius'] = '4px';
-    this.posterImgStyle['boxShadow'] = '0 0 4px rgba(0, 0, 0, 0.2)';
-  }
+  constructor(private route: ActivatedRoute, private movieService: MovieService) { }
 
   ngOnInit() {
     this.route.data.subscribe((data) => {
       const { movie } = data;
       this.movie = movie;
       this.ratings = Array(3).fill(new Object());
-      this.getDoubanRating(movie.imdb_id);
-      this.getOMDBRatings(movie.imdb_id);
       this.ratings[0] = {
         link: `https://www.themoviedb.org/movie/${movie.id}`,
         rating: movie.vote_average
       };
+
+      this.getDoubanRating(movie.imdb_id);
+      this.getOMDBRatings(movie.imdb_id);
+      this.movieService.getTMDBConfig(this.getPaletteFromPoster.bind(this));
     });
   }
 
@@ -59,6 +52,11 @@ export class MovieDetailComponent implements OnInit {
         };
       }
     });
+  }
+
+  getPaletteFromPoster(config: Config) {
+    let image = config.images.secure_base_url + config.images.poster_sizes[2] + this.movie.poster_path;
+
   }
 
   getReleaseYear() {

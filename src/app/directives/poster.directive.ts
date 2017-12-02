@@ -19,6 +19,7 @@ export class PosterDirective implements OnInit {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
+      alignSelf: 'center',
       background: 'rgba(0, 0, 0, 0.9)'
     };
 
@@ -29,23 +30,25 @@ export class PosterDirective implements OnInit {
     }
 
     let img = new Image();
-    let imgStyle = this.imgStyle || {};
-    for (let prop in imgStyle) {
-      img.style[prop] = imgStyle[prop];
-    }
-    img.style.maxWidth = customStyle['width']; // parent width
-    img.style.maxHeight = customStyle['height']; // parent height
     img.alt = '';
     this.el.nativeElement.append(img);
 
     if (!this.path) {
-      this.el.nativeElement.style.background = 'rgb(219, 219, 219)'; // Overwrite background color
+      // Overwrite style
+      const { style } = this.el.nativeElement; 
+      style.background = 'rgb(219, 219, 219)';
       img.src = '/assets/icons/icons8-picture-96.png';
       return; // End of procedure
     }
 
     this.movieService.getTMDBConfig((config: Config) => {
       img.src = config.images.secure_base_url + config.images.poster_sizes[4] + this.path;
+      let imgStyle = this.imgStyle || {};
+      for (let prop in imgStyle) {
+        img.style[prop] = imgStyle[prop];
+      }
+      img.style.maxWidth = customStyle['width']; // parent width
+      img.style.maxHeight = customStyle['height']; // parent height
     });
   }
 

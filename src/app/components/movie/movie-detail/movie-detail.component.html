@@ -1,18 +1,26 @@
 <div class="container">
-  <!-- <div class="custom background" [ngStyle]="background"></div> -->
-  <div class="custom backdrop" appBackground [path]="movie.backdrop_path"></div>
+  <div 
+    class="custom background"
+    appBackground
+    [backgroundPath]="movie.backdrop_path"
+    [posterPath]="movie.poster_path"
+  >
+  </div>
   <div class="custom content">
-    <div class="poster"
+    <div
+      class="poster"
       appPoster
       [path]="movie.poster_path"
-      [style]="posterStyle"
-      [imgStyle]="posterImgStyle"
+      [style]="{ width: '300px', height: '450px', background: 'transparent' }"
+      [imgStyle]="{ borderRadius: '4px', boxShadow: '0 0 4px rgba(0, 0, 0, 0.2)' }"
     >
     </div>
     <div class="summary">
       <section>
         <h2>
-          <a [routerLink]="['/movie', movie.id, movie.title | movieRouterlink]">{{movie.title}}</a>
+          <a [routerLink]="['/movie', movie.id, movie.title | movieRouterlink]">
+            {{movie.title}}
+          </a>
           <span> ({{getReleaseYear()}})</span>
         </h2>
       </section>
