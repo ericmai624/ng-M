@@ -17,6 +17,9 @@ export class BackgroundDirective implements OnInit {
       return;
     }
 
+    const { parentNode } = this.el.nativeElement;
+    const background = document.createElement('div');
+    const curtain = document.createElement('div');
     // this.movieService.getTMDBConfig((config) => {
     //   const image = config.images.secure_base_url + config.images.backdrop_sizes[2] + this.path;
     //   this.el.nativeElement.style.backgroundImage = `url(${image})`;

@@ -1,6 +1,6 @@
 import { extend } from 'lodash';
 
-import { Directive, ElementRef, Input, OnInit } from '@angular/core';
+import { Directive, ElementRef, Input, OnInit, Renderer2 } from '@angular/core';
 
 import { Config, MovieService } from '../components/movie/movie.service';
 
@@ -12,7 +12,7 @@ export class PosterDirective implements OnInit {
   @Input() style: object;
   @Input() imgStyle: object;
 
-  constructor(private el: ElementRef, private movieService: MovieService) { }
+  constructor(private el: ElementRef, private movieService: MovieService, private renderer: Renderer2) { }
   
   ngOnInit() {
     const defaultStyle = {
