@@ -25,7 +25,7 @@
   </div>
   <div class="details">
     <h3>Top Cast</h3>
-    <div class="cast">
+    <div class="cast" appAutoResize>
       <app-cast
         *ngFor="let cast of movie.credits.cast.slice(0, 6)"
         [cast]="cast"

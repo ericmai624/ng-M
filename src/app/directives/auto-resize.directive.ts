@@ -12,7 +12,7 @@ export class AutoResizeDirective {
 
   ngAfterViewInit() {
     const { children } = this.el.nativeElement;
-    let maxHeight = -Infinity;
+    let maxHeight = 0;
 
     for (let i = 0; i < children.length; i++) {
       maxHeight = Math.max(children[i].offsetHeight, maxHeight);

@@ -9,14 +9,17 @@ import { CanvasCircleRatingDirective } from './directives/canvas-circle-rating.d
 import { MultilineEllipsisDirective } from './directives/multiline-ellipsis.directive';
 import { BackdropDirective } from './directives/backdrop.directive';
 import { PosterDirective } from './directives/poster.directive';
+import { ProfileImageDirective } from './directives/profile-image.directive';
+import { AutoResizeDirective } from './directives/auto-resize.directive';
 
 import { MovieRouterlinkPipe } from './pipes/movie-routerlink.pipe';
+
+import { MovieService } from './components/movie/movie.service';
 
 import { AppComponent } from './app.component';
 import { NavComponent } from './components/nav/nav.component';
 import { SearchComponent } from './components/search/search.component';
 import { MovieListComponent } from './components/movie/movie-list/movie-list.component';
-import { MovieService } from './components/movie/movie.service';
 import { MovieDetailComponent } from './components/movie/movie-detail/movie-detail.component';
 import { HomepageComponent } from './components/homepage/homepage.component';
 import { MovieListEntryComponent } from './components/movie/movie-list/movie-list-entry/movie-list-entry.component';
@@ -24,7 +27,6 @@ import { SearchResultsComponent } from './components/search/search-results/searc
 import { SearchResultEntryComponent } from './components/search/search-results/search-result-entry/search-result-entry.component';
 import { RatingsComponent } from './components/movie/ratings/ratings.component';
 import { CastComponent } from './components/movie/movie-detail/cast/cast.component';
-import { ProfileImageDirective } from './directives/profile-image.directive';
 
 
 @NgModule({
@@ -45,7 +47,8 @@ import { ProfileImageDirective } from './directives/profile-image.directive';
     MovieRouterlinkPipe,
     RatingsComponent,
     CastComponent,
-    ProfileImageDirective
+    ProfileImageDirective,
+    AutoResizeDirective
   ],
   imports: [
     BrowserModule,

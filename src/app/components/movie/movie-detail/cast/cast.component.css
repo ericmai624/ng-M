@@ -12,6 +12,11 @@ p {
 
 .profile-image {
   height: 225px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.9);
+  box-sizing: border-box;
 }
 
 .info {
