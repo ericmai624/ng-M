@@ -7,7 +7,7 @@ import { AppRoutingModule } from './/app-routing.module';
 
 import { CanvasCircleRatingDirective } from './directives/canvas-circle-rating.directive';
 import { MultilineEllipsisDirective } from './directives/multiline-ellipsis.directive';
-import { BackdropDirective } from './directives/backdrop.directive';
+import { BackgroundDirective } from './directives/background.directive';
 import { PosterDirective } from './directives/poster.directive';
 import { ProfileImageDirective } from './directives/profile-image.directive';
 import { AutoResizeDirective } from './directives/auto-resize.directive';
@@ -42,7 +42,7 @@ import { CastComponent } from './components/movie/movie-detail/cast/cast.compone
     SearchResultEntryComponent,
     CanvasCircleRatingDirective,
     MultilineEllipsisDirective,
-    BackdropDirective,
+    BackgroundDirective,
     PosterDirective,
     MovieRouterlinkPipe,
     RatingsComponent,

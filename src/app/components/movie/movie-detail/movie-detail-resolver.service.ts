@@ -1,4 +1,4 @@
-import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/take';
 import { Observable } from 'rxjs/Observable';
 
 import { Injectable } from '@angular/core';
@@ -14,10 +14,11 @@ export class MovieDetailResolver implements Resolve<Movie> {
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Movie> {
     const id = route.paramMap.get('id');
 
-    return this.movieService.fetchMovieDetailById(id).map((movie: Movie) => {
+    return this.movieService.fetchMovieDetailById(id).take(1).map((movie: Movie) => {
       if (movie) {
         return movie;
       }
+      // navigate to an error route if can't fetch details
       return null;
     });
   }

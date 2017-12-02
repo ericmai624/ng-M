@@ -1,8 +1,8 @@
-import { BackdropDirective } from './backdrop.directive';
+import { BackgroundDirective } from './background.directive';
 
 describe('BackdropDirective', () => {
   it('should create an instance', () => {
-    const directive = new BackdropDirective();
+    const directive = new BackgroundDirective();
     expect(directive).toBeTruthy();
   });
 });

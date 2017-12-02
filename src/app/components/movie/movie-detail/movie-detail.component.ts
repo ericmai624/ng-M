@@ -17,8 +17,6 @@ export class MovieDetailComponent implements OnInit {
   ratings: object[];
 
   constructor(private route: ActivatedRoute, private movieService: MovieService) {
-    this.background['background-image'] = 'radial-gradient(circle at 20% 50%,rgba(94.12%, 69.41%, 3.92%, 0.94) 0%,rgba(83.14%, 43.92%, 0.00%, 0.94) 100%)';
-
     this.posterStyle['width'] = '300px';
     this.posterStyle['height'] = '100%';
     this.posterStyle['background'] = 'transparent';

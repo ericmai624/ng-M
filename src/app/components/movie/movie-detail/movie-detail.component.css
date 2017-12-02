@@ -47,6 +47,7 @@ p {
 .poster {
   grid-column: 2;
   overflow: hidden;
+  z-index: 100;
 }
 
 .summary {
@@ -60,6 +61,7 @@ p {
   color: white;
   padding-left: 40px;
   box-sizing: border-box;
+  z-index: 100;
 }
 
 .details {
