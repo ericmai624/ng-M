@@ -1,11 +1,11 @@
 <div class="search-result-entry">
   <a [routerLink]="['/movie', movie.id, movie.title | movieRouterlink]">
-    <div 
-      class="poster"
-      appPoster
-      [path]="movie.poster_path"
-      [style]="{ width: 278 * 2 / 3 + 'px', height: '278px' }"
+    <div class="poster" [style.background]="movie.poster_path ? 'black' : 'rgb(218, 218, 218)'">
+      <app-poster
+        [path]="movie.poster_path"
+        [style]="{ maxWidth: 278 * 2 / 3 + 'px', maxHeight: '278px' }"
       >
+      </app-poster>
     </div>
   </a>
   <div class="main">

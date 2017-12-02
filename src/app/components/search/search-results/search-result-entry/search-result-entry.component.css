@@ -29,6 +29,14 @@ i,small {
 
 .poster {
   grid-column: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: calc(278px * 2 / 3);
+  height: 278px;
+  overflow: hidden;
+  box-sizing: border-box;
+  line-height: 0;
 }
 
 .main {
