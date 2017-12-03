@@ -16,6 +16,7 @@ app.use(express.static(dist));
 
 // Data endpoints
 app.use('/api/movies', middleware.setHeaders, routes.movies);
+app.use('/api/images', middleware.setHeaders, routes.images);
 
 // Pages endpoints(Frontend handled routing)
 app.get('*', (req, res) => res.render(dist + 'index.html'));

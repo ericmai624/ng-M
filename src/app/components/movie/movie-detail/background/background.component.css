@@ -1,5 +1,19 @@
+.stack {
+  position: absolute;
+}
+
 .background {
-  height: 530px;
+  z-index: -1;
   width: 100%;
-  background: black;
+  height: 530px;
+  line-height: 0;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  filter: grayscale(100%);
+}
+
+.curtain {
+  width: 100%;
+  height: 530px;
 }

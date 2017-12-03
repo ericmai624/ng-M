@@ -30,14 +30,6 @@ p {
   height: 530px;
 }
 
-.background {
-  z-index: -1;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: 50% 50%;
-  filter: grayscale(100%);
-}
-
 .content {
   display: grid;
   grid-template-columns: calc(50vw - 500px) 300px 700px;

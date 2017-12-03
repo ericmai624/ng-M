@@ -1,6 +1,10 @@
 <div class="container">
-  <div class="custom background">
-    <app-background></app-background>
+  <div class="custom">
+    <app-background
+      [background]="movie.backdrop_path"
+      [poster]="movie.poster_path"
+    >
+    </app-background>
   </div>
   <div class="custom content">
     <div class="poster" [style.background]="movie.poster_path ? 'transparent' : 'rgb(218, 218, 218)'">

@@ -42,6 +42,10 @@ export class MovieService {
     return callback(config);
   }
 
+  getBackdrop(background: string, poster: string) {
+    return this.http.get(`${this.domain}/api/images?background=${background}&poster=${poster}`);
+  }
+
 }
 
 // TMDB Movie Detail Obj
