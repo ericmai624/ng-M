@@ -3,8 +3,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { Movie, Config, MovieService } from '../movie.service';
 
-// const Vibrant = require('node-vibrant'); // using this format because node-vibrant uses 'export =' format
-
 @Component({
   selector: 'app-movie-detail',
   templateUrl: './movie-detail.component.html',
@@ -21,14 +19,12 @@ export class MovieDetailComponent implements OnInit {
       const { movie } = data;
       this.movie = movie;
       this.ratings = Array(3).fill(new Object());
+      this.getDoubanRating(movie.imdb_id);
+      this.getOMDBRatings(movie.imdb_id);
       this.ratings[0] = {
         link: `https://www.themoviedb.org/movie/${movie.id}`,
         rating: movie.vote_average
       };
-
-      this.getDoubanRating(movie.imdb_id);
-      this.getOMDBRatings(movie.imdb_id);
-      this.movieService.getTMDBConfig(this.getPaletteFromPoster.bind(this));
     });
   }
 
@@ -52,11 +48,6 @@ export class MovieDetailComponent implements OnInit {
         };
       }
     });
-  }
-
-  getPaletteFromPoster(config: Config) {
-    let image = config.images.secure_base_url + config.images.poster_sizes[2] + this.movie.poster_path;
-
   }
 
   getReleaseYear() {
