@@ -17,8 +17,11 @@ export class PosterComponent implements OnInit {
 
   ngOnInit() {
     if (!this.path) {
+      // Overwrite styles
       this.style['boxShadow'] = 'none';
       this.style['border'] = 'none';
+      this.style['width'] = '100%';
+      this.style['height'] = '100%';
       this.src = '/assets/icons/icons8-picture-96.png';      
       return;
     }
