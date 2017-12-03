@@ -18,6 +18,8 @@ export class BackgroundComponent implements OnInit {
 
   ngOnInit() {
     if (!this.background || !this.poster) {
+      const backgroundImage = 'radial-gradient(circle at 20% 50%, rgba(43.33%, 43.33%, 43.33%, 0.94) 0%, rgba(63.33%, 63.33%, 63.33%, 0.94) 100%)';
+      this.curtain = { backgroundImage };
       return;
     }
 
