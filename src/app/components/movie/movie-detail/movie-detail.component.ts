@@ -24,6 +24,10 @@ export class MovieDetailComponent implements OnInit {
   }
 
   getRating() {
+    if (!this.movie.imdb_id || this.movie.imdb_id === '') {
+      return;
+    }
+    
     this.movieService.getRating(this.movie.imdb_id).subscribe((data) => {
       this.ratings = [
         {

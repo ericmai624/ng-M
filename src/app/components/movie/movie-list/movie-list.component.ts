@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import {
   animate,
   trigger,
@@ -26,13 +26,15 @@ import { Movie, MovieService } from '../movie.service';
   ]
 })
 export class MovieListComponent implements OnInit {
-  @Output() fetchingMovie: EventEmitter<boolean>;
   movies: Movie[];
   state: string;
+  page: number;
   
-  constructor(private movieService: MovieService) { 
-    this.fetchingMovie = new EventEmitter();
+  constructor(private movieService: MovieService) {
+    this.movies = [];
+    this.page = 1;
     this.state = 'inactive';
+    this.fetchMovies = this.fetchMovies.bind(this);
   }
 
   ngOnInit() {
@@ -40,10 +42,9 @@ export class MovieListComponent implements OnInit {
   }
 
   fetchMovies() {
-    this.fetchingMovie.emit(true);
-    this.movieService.fetchMovies().subscribe((data) => {
-      this.fetchingMovie.emit(false);
-      this.movies = data['results'];
+    this.movieService.fetchMovies(this.page).subscribe((data) => {
+      this.page++;
+      this.movies = this.movies.concat(data['results']);
       this.state = 'active';
     }, (err) => {
       console.log(err);

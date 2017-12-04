@@ -2,15 +2,15 @@ const request = require('request-promise');
 const fs = require('fs');
 const path = require('path');
 const Promise = require('bluebird');
-const cheerio = require('cheerio');
 const chalk = require('chalk');
-
+const jwt = require('jsonwebtoken');
 const config = require('config');
 
 const readFileAsync = Promise.promisify(fs.readFile);
 const tmdb_apiHost = config.themoviedb.hostname || process.env.TMDB_API_HOST;
 const tmdb_apiKey = config.themoviedb.apiKey || process.env.TMDB_API_KEY;
 const fetchlab_url = config.fetchlab || process.env.FETCHLAB_URL;
+const secret = config.jwt.secret || process.env.JWT_SECRET;
 
 module.exports.fetchMovies = (req, res) => {
   const options = {
@@ -18,12 +18,14 @@ module.exports.fetchMovies = (req, res) => {
     qs: {
       api_key: tmdb_apiKey,
       language: 'en-US',
-      page: 1,
+      page: req.query.page,
     }
   };
 
   request(options)
-    .then((body) => res.send(body))
+    .then((body) => {
+      res.send(body); // Send information to client first
+    })
     .catch((err) => console.log(chalk.red('error in fetch movies promise chain: ' + err)));
 };
 
@@ -31,7 +33,7 @@ module.exports.fetchMovieById = (req, res) => {
   const id = req.params.id;
   const options = {
     uri: `${tmdb_apiHost}/3/movie/${id}`,
-    qs: { 
+    qs: {
       api_key: tmdb_apiKey,
       append_to_response: 'videos,credits'
     }
@@ -79,9 +81,16 @@ module.exports.readTMDBConfigFile = (req, res) => {
 
 module.exports.getRating = (req, res) => {
   const id = req.params.id;
-  const uri = `${fetchlab_url}/api/rating/${id}`;
+  const origin = req.hostname;
+  const token = jwt.sign({ origin }, secret, { expiresIn: 300 });
+  const options = {
+    uri: `${fetchlab_url}/api/rating/${id}`,
+    headers: {
+      authorization: `Bearer ${token}`
+    }
+  };
   
-  request({ uri })
+  request(options)
     .then((body) => {
       res.send(body);
     })
