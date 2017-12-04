@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 export class MovieService {
   dev: boolean;
   domain: string;
+  fetchlab: string;
 
   constructor(private http: HttpClient) {
     this.dev = isDevMode();
@@ -23,12 +24,8 @@ export class MovieService {
     return this.http.get(`${this.domain}/api/movies/tmdb/search?keyword=${keyword}`);
   }
 
-  fetchDouBanRating(id: string) {
-    return this.http.get(`${this.domain}/api/movies/douban/${id}`);
-  }
-
-  fetchOMDBDetail(id: string) {
-    return this.http.get(`${this.domain}/api/movies/omdb/${id}`);
+  getRating(id: string) {
+    return this.http.get(`${this.domain}/api/movies/rating/${id}`);
   }
 
   getTMDBConfig(callback) {

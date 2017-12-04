@@ -4,7 +4,7 @@ import { Directive, Input, ElementRef, OnChanges } from '@angular/core';
   selector: '[appCanvasCircleRating]'
 })
 export class CanvasCircleRatingDirective {
-  @Input() rating: number;
+  @Input() rating: any;
   @Input() rgb: string;
   endAngle: number;
 
@@ -45,8 +45,8 @@ export class CanvasCircleRatingDirective {
     // inner text
     ctx.font = '38px Roboto';
     let text = 'N/A';
-    if (this.rating) {
-      text = this.rating.toFixed(1).toString();
+    if (this.rating && this.rating !== '0') {
+      text = Number(this.rating).toFixed(1);
     }
     ctx.fillStyle = 'rgb(255, 255, 255)';
     ctx.textAlign = 'center';
@@ -57,7 +57,7 @@ export class CanvasCircleRatingDirective {
 
     // draw percentage circle
     ctx.restore();
-    if (this.rating) {
+    if (this.rating && this.rating !== '0') {
       const percentage = Number(this.rating) / 10;
       const startAngle = -(Math.PI / 180) * 90;      
       ctx.beginPath();

@@ -9,8 +9,9 @@ router.get('/tmdb/config', MovieController.readTMDBConfigFile);
 
 router.get('/tmdb/search', MovieController.fetchMoviesWithKeyword);
 
-router.get('/douban/:id', MovieController.fetchDoubanRating);
-
-router.get('/omdb/:id', MovieController.fetchOMDBDetail);
+router.route('/rating/:id')
+  .get(MovieController.getRating)
+  // .post(MovieController.prefetchRating)
+;
 
 module.exports = router;

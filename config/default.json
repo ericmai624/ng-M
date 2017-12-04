@@ -1,5 +1,8 @@
 {
   "themoviedb": {},
-  "omdb": {},
-  "cors": {}
+
+  "cors": {},
+
+  "fetchlab": ""
+  
 }
