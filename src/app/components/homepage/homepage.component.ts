@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgClass } from '@angular/common';
 
-import { Router } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 
 import { Movie, MovieService } from '../movie/movie.service';
 
@@ -18,7 +18,13 @@ export class HomepageComponent implements OnInit {
     this.searchFocused = false;
   }
   
-  ngOnInit() { }
+  ngOnInit() { 
+    this.router.events.subscribe((e) => {
+      if (e instanceof NavigationEnd) {
+        window.scrollTo(0, 0);
+      }
+    });
+  }
 
   onSearchFocus(focused: boolean) {
     this.searchFocused = focused;
