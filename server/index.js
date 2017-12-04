@@ -11,7 +11,7 @@ app.use(middleware.bodyParser.json());
 app.use(middleware.bodyParser.urlencoded({ extended: true }));
 app.use(middleware.morgan(process.env.NODE_ENV === 'production' ? 'common' : 'dev'));
 
-app.engine('html', require('ejs').renderFile); // use ejs renderFile to compile html
+app.engine('html', require('pug').renderFile); // use pug renderFile to render html
 app.use(express.static(dist));
 
 // Data endpoints

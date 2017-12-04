@@ -1,8 +1,17 @@
 {
-  "themoviedb": {},
+  "themoviedb": {
+    "apiKey": "",
+    "hostname": ""
+  },
 
-  "cors": {},
+  "cors": {
+    "url": ""
+  },
 
-  "fetchlab": ""
+  "fetchlab": "",
+
+  "jwt": {
+    "secret": ""
+  }
   
 }

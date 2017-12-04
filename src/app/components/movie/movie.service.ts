@@ -12,8 +12,8 @@ export class MovieService {
     this.domain = this.dev ? 'http://localhost:8080' : ''; 
   }
 
-  fetchMovies() {
-    return this.http.get(`${this.domain}/api/movies`);
+  fetchMovies(page: number) {
+    return this.http.get(`${this.domain}/api/movies?page=${page}`);
   }
 
   fetchMovieDetailById(id: string) {

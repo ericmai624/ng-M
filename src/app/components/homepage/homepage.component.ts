@@ -11,20 +11,14 @@ import { Movie, MovieService } from '../movie/movie.service';
   styleUrls: ['./homepage.component.css']
 })
 export class HomepageComponent implements OnInit {
-  fetching: boolean;
   searchFocused: boolean;
   title: string;
   
   constructor(private movieService: MovieService, private router: Router) {
     this.searchFocused = false;
-    this.fetching = false;
   }
   
   ngOnInit() { }
-
-  onFetchingMovies(fetching: boolean) {
-    this.fetching = fetching;
-  }
 
   onSearchFocus(focused: boolean) {
     this.searchFocused = focused;
