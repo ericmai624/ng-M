@@ -1,6 +1,6 @@
 <div class="title">NOW PLAYING</div>
 <hr width="5%" align="center" color="#E19771">
-<div class="movie-list" [@state]="state">
+<div class="movie-list" [@state]="state" appInfiniteScroll [scrollCallback]="fetchMovies">
   <app-movie-list-entry
     *ngFor = "let movie of movies"
     [movie] = "movie"

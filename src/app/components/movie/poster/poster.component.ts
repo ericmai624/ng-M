@@ -16,7 +16,7 @@ export class PosterComponent implements OnInit {
   constructor(private movieService: MovieService) { }
 
   ngOnInit() {
-    if (!this.path) {
+    if (!this.path || this.path === '') {
       // Overwrite styles
       this.style['boxShadow'] = 'none';
       this.style['border'] = 'none';
