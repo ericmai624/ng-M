@@ -40,8 +40,9 @@
     <h3>Top Cast</h3>
     <div class="cast" appAutoResize>
       <app-cast
-        *ngFor="let cast of movie.credits.cast.slice(0, 6)"
+        *ngFor="let cast of movie.credits.cast.slice(0, 6); let first = first;"
         [cast]="cast"
+        [class.first-item]="first"
       ></app-cast>
     </div>
   </div>

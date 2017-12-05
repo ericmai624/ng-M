@@ -3,11 +3,17 @@ p {
   padding: 0;
 }
 
+.first-item {
+  margin-left: 0;
+}
+
 .container {
   display: grid;
   width: 150px;
   border: 1px solid #e3e3e3;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-right: calc((990px - 150px * 6) / 5); /* 1000px minus border sizes = 990px */
+  box-sizing: content-box;
 }
 
 .profile-image {
