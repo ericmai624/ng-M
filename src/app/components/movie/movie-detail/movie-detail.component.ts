@@ -9,7 +9,7 @@ import { Movie, Config, MovieService } from '../movie.service';
   styleUrls: ['./movie-detail.component.css']
 })
 export class MovieDetailComponent implements OnInit {
-  movie: Movie
+  movie: Movie;
   ratings: object[];
 
   constructor(private route: ActivatedRoute, private movieService: MovieService) { }

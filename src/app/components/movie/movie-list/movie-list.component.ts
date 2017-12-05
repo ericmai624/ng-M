@@ -26,20 +26,19 @@ import { Movie, MovieService } from '../movie.service';
   ]
 })
 export class MovieListComponent implements OnInit {
-  movies: Movie[];
-  state: string;
-  page: number;
-  totalPage: number;
+  movies: Movie[] = [];
+  cache: object = {};
+  state: string = 'inactive';
+  page: number = 1;
+  totalPage: number = 1;
   
   constructor(private movieService: MovieService) {
-    this.movies = [];
-    this.page = 1;
-    this.state = 'inactive';
     this.fetchMovies = this.fetchMovies.bind(this);
+    this.processData = this.processData.bind(this);
   }
 
   ngOnInit() {
-    this.fetchMovies();
+    this.movieService.fetchMovies(this.page).subscribe(this.processData);
   }
 
   fetchMovies() {
@@ -47,14 +46,30 @@ export class MovieListComponent implements OnInit {
       return; // no more results
     }
     
-    this.movieService.fetchMovies(this.page).subscribe((data) => {
-      this.page++;
-      this.movies = this.movies.concat(data['results']);
-      this.totalPage = data['total_pages'];
-      this.state = 'active';
-    }, (err) => {
-      console.log(err);
-    });
+    return this.movieService.fetchMovies(this.page).do(this.processData);
+  }
+
+  processData(data) {
+    const results = data['results'];
+    this.removeDuplicates(results); // results between pages may contain duplicates from API
+    this.movies = this.movies.concat(results.filter((movie) => movie !== null));
+    this.page++;
+    this.totalPage = data['total_pages'];
+    this.state = 'active';
+  }
+
+  removeDuplicates(results) {
+    const hash = {};
+
+    for (let i = 0; i < results.length; i++) {
+      const id = results[i].id;
+      hash[id] = true;
+      if (this.cache[id]) {
+        results[i] = null; 
+      }
+    }
+
+    this.cache = hash;
   }
 
 }
