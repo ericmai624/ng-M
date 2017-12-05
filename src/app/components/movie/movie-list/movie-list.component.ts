@@ -29,6 +29,7 @@ export class MovieListComponent implements OnInit {
   movies: Movie[];
   state: string;
   page: number;
+  totalPage: number;
   
   constructor(private movieService: MovieService) {
     this.movies = [];
@@ -42,9 +43,14 @@ export class MovieListComponent implements OnInit {
   }
 
   fetchMovies() {
+    if (this.page > this.totalPage) {
+      return; // no more results
+    }
+    
     this.movieService.fetchMovies(this.page).subscribe((data) => {
       this.page++;
       this.movies = this.movies.concat(data['results']);
+      this.totalPage = data['total_pages'];
       this.state = 'active';
     }, (err) => {
       console.log(err);

@@ -10,6 +10,7 @@ import { CanvasCircleRatingDirective } from './directives/canvas-circle-rating.d
 import { MultilineEllipsisDirective } from './directives/multiline-ellipsis.directive';
 import { ProfileImageDirective } from './directives/profile-image.directive';
 import { AutoResizeDirective } from './directives/auto-resize.directive';
+import { InfiniteScrollDirective } from './directives/infinite-scroll.directive';
 
 import { MovieRouterlinkPipe } from './pipes/movie-routerlink.pipe';
 
@@ -49,7 +50,8 @@ import { BackgroundComponent } from './components/movie/movie-detail/background/
     ProfileImageDirective,
     AutoResizeDirective,
     PosterComponent,
-    BackgroundComponent
+    BackgroundComponent,
+    InfiniteScrollDirective
   ],
   imports: [
     BrowserModule,
