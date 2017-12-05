@@ -19,6 +19,7 @@ module.exports.fetchMovies = (req, res) => {
       api_key: tmdb_apiKey,
       language: 'en-US',
       page: req.query.page,
+      region: 'us'
     }
   };
 
