@@ -28,7 +28,7 @@ export class InfiniteScrollDirective {
   streamScrollEvent() {
     return this.scrollEvent
       .map((e: any) => ({
-        sT: e.target.documentElement.scrollTop,
+        sT: e.target.documentElement.scrollTop || window.pageYOffset,
         sH: e.target.documentElement.scrollHeight,
         cH: e.target.documentElement.clientHeight
       }))
