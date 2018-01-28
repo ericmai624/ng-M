@@ -1,14 +1,13 @@
-<div class="search">
-  <input 
-    placeholder="Search..."
+<form class="search">
+  <input
+    placeholder="Search Justag by..."
+    autocomplete="off"
     #search
     [value]="input"
+    [ngStyle]="input.length ? { textAlign: 'center' } : { textAlign: 'left' }"
     (keyup)="handleSearchInput(search.value)"
     (keyup.enter)="handleSearchSubmit()"
     (focus)="handleSearchFocus()"
     (blur)="handleSearchBlur()"
   />
-  <button (click)="handleSearchSubmit()">
-    <i class="fa fa-search fa-2x fa-inverse" aria-hidden="true"></i>    
-  </button>
-</div>
+</form>

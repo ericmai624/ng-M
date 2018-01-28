@@ -3,6 +3,7 @@ const path = require('path');
 const request = require('request-promise');
 const chalk = require('chalk');
 const Vibrant = require('node-vibrant');
+const sharp = require('sharp');
 
 module.exports.getBackdrop = (req, res) => {
   const { background, poster } = req.query;

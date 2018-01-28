@@ -29,6 +29,8 @@ const worker = schedule.scheduleJob({ hour: 5, minute: 0 }, () => {
   ;
 });
 
-setInterval(() => {
-  request.get('http://justag.herokuapp.com/');
-}, 1000 * 60 * 5);
+const wakeFetchlabUp = () => {
+  request('https://fetchlab.herokuapp.com/keepalive');
+};
+
+wakeFetchlabUp();

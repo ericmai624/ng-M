@@ -1,28 +1,28 @@
 .search {
   display: flex;
   align-content: center;
-  border: 2px solid rgba(34, 34, 34, 0.8);
-  border-radius: 5px;
 }
 
 .search input {
-  font-size: 1em;
+  font-size: 40px;
   outline: none;
+  vertical-align: middle;
+  line-height: 50px;
   width: 30vw;
-  height: 35px;
-  padding: 0 10px;
-  border: 0;
-  border-radius: 5px 0 0 5px;
+  border: none;
   box-sizing: border-box;
 }
 
+.search input::placeholder {
+  text-align: center;
+  color: rgb(228,228,228);
+}
+
 .search button {
-  width: 37px;
-  height: 35px;
-  border: 0;
+  font-size: inherit;
+  color: rgb(52,73,94);
+  border: none;
   outline: none;
-  border-radius: 0;
-  background: rgba(34, 34, 34, 0.8);
   cursor: pointer;
   z-index: 100;
 }
