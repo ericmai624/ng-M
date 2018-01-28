@@ -1,28 +1,16 @@
-.search {
-  display: flex;
-  align-content: center;
-}
-
-.search input {
+input {
+  display: inline-block;
   font-size: 40px;
+  width: 448.667px;
   outline: none;
   vertical-align: middle;
   line-height: 50px;
-  width: 448.667px;
   border: none;
-  box-sizing: border-box;
+  box-sizing: content-box;
 }
 
-.search input::placeholder {
+input::placeholder {
   text-align: center;
   color: rgb(228,228,228);
 }
 
-.search button {
-  font-size: inherit;
-  color: rgb(52,73,94);
-  border: none;
-  outline: none;
-  cursor: pointer;
-  z-index: 100;
-}
