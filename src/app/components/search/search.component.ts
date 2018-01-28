@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { NgStyle } from '@angular/common';
 
 @Component({
   selector: 'app-search',
@@ -18,6 +19,7 @@ export class SearchComponent implements OnInit {
 
   ngOnInit() { }
 
+  /* Focus and Blur is not used here, reserved for future use */
   handleSearchFocus() {
     this.onSearchFocus.emit(true);
   }
