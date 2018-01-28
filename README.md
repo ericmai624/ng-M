@@ -1,4 +1,6 @@
-# NgM
+# Justag
+
+### Get movie ratings from TMDB, IMDB, and Douban
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.5.0.
 
