@@ -4,7 +4,8 @@ const middleware = require('./middleware');
 const routes = require('./routes');
 const app = express();
 const port = process.env.PORT || 8080;
-const dist = path.join(__dirname + '/../dist/');
+const dist = path.join(__dirname, '..', 'dist');
+const { each } = require('lodash');
 require('../worker');
 
 app.use(middleware.bodyParser.json());
@@ -15,10 +16,9 @@ app.engine('html', require('pug').renderFile); // use pug renderFile to render h
 app.use(express.static(dist));
 
 // Data endpoints
-app.use('/api/movies', middleware.setHeaders, routes.movies);
-app.use('/api/images', middleware.setHeaders, routes.images);
+each(routes, (cb, endpoint) => app.use(`/api/${endpoint}`, middleware.setHeaders, cb));
 
 // Pages endpoints(Frontend handled routing)
 app.get('*', (req, res) => res.render(dist + 'index.html'));
 
-app.listen(port, () => console.log(`Ready to accept connections on ${port}`));
+app.listen(port, console.log.bind(console, `Ready to accept connections on ${port}`));
